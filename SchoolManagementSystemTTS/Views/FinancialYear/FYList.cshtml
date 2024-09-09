@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Financial_vw>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card mt-3 mb-3">
+    <div class="card-header">
+        <h3 class="text-center">Financial Years List</h3>
+        <hr />
+    </div>
+    <div class="card-body">
+        <div class="table-responsive text-nowrap">
+            <table class="table table-responsive">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.STARTDATE)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ENDDATE)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.STARTMON)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ENDMON)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DESCRIPTION)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ISACTIVE)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Campdesc)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Instdesc)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.STARTDATE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ENDDATE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.STARTMON)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ENDMON)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DESCRIPTION)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ISACTIVE)
+                        </td>
+
+                        <td>
+                            @Html.DisplayNameFor(model => model.Campdesc)
+                        </td>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Instdesc)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "EditFY", new { id = item.FINCID }) 
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<p>
+    @Html.ActionLink("Create New", "CreateFY")
+</p>

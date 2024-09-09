@@ -32,5 +32,18 @@ namespace SchoolManagementSystemTTS.Models
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Institution> Institutions { get; set; }
         public virtual DbSet<Campu> Campus { get; set; }
+        public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<Program> Programs { get; set; }
+        public virtual DbSet<State> States { get; set; }
+        public virtual DbSet<Institution_vw> Institution_vw { get; set; }
+        public virtual DbSet<Campus_vw> Campus_vw { get; set; }
+        public virtual DbSet<Program_vw> Program_vw { get; set; }
+        public virtual DbSet<Class> Classes { get; set; }
+        public virtual DbSet<FinancialYear> FinancialYears { get; set; }
+        public virtual DbSet<Term> Terms { get; set; }
+        public virtual DbSet<Class_vw> Class_vw { get; set; }
+        public virtual DbSet<Financial_vw> Financial_vw { get; set; }
+        public virtual DbSet<Term_vw> Term_vw { get; set; }
     }
 }

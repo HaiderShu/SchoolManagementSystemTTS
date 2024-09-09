@@ -1,0 +1,86 @@
+﻿@model Campu
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm("AddCampus", "Campus", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="card mt-3">
+            <div class="card-header">
+                <h3 class="text-center">Create Campus</h3>
+                <hr />
+            </div>
+            <div class="card-body row">
+
+                <div class="form-group col-md-6 mb-3">
+                    @Html.LabelFor(model => model.Instid, "Instid", htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-12">
+                        @Html.DropDownList("Instid", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Instid, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    @Html.LabelFor(model => model.Campdesc, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Campdesc, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Campdesc, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    @Html.LabelFor(model => model.Campshortdesc, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Campshortdesc, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Campshortdesc, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <label>Country</label>
+                    <div class="col-md-12">
+                        @Html.DropDownList("Countid", null, "Please Select Country Name", htmlAttributes: new { @class = "form-control", @id = "country" })
+                        @Html.ValidationMessageFor(model => model.Countid, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <label>State</label>
+                    <div class="col-md-12">
+                        @Html.DropDownListFor(model => model.Stateid, new SelectList(""), "Please select State Name", new { @class = "form-control", disabled = "disabled", @id = "state" })
+                        @Html.ValidationMessageFor(model => model.Stateid, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <label>City</label>
+                    <div class="col-md-12">
+                        @Html.DropDownListFor(model => model.Cityid, new SelectList(""), "Please select City Name", new { @class = "form-control", disabled = "disabled", @id = "city" })
+                        @Html.ValidationMessageFor(model => model.Cityid, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Cityid, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group col-md-6 mb-3"></div>
+
+                <div class="form-group col-md-6 mt-4">
+                    <div class=" col-md-12 d-flex justify-content-end">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Campuslist")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Program_vw>
+
+@{
+
+}
+
+<div class="card mt-3 mb-3">
+    <div class="card-body">
+        <div class="table-responsive text-nowrap">
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ProgDesc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Progshortdesc)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.Campdesc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Instdesc)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.ActvStatus)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProgDesc)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Progshortdesc)
+                            </td>
+
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Campdesc)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Instdesc)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ActvStatus)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "EditProgram", new { id = item.Progid }) 
+                                @*| @Html.ActionLink("Details", "ProgramDetails", new { id = item.Progid }) |
+                                @Html.ActionLink("Delete", "DeleteProgram", new { id = item.Progid })*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<p>
+    @Html.ActionLink("Create New", "Addprogram")
+</p>

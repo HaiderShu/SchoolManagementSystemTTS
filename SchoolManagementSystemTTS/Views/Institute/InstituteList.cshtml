@@ -1,0 +1,76 @@
+﻿@model IEnumerable<SchoolManagementSystemTTS.Models.Institution_vw>
+
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+<p>
+    @Html.ActionLink("Create New", "Createinstitute")
+</p>
+
+
+<div class="card mt-3 mb-3">
+    <div class="card-header">
+        <h3 class="text-center">Institute List</h3>
+        <hr />
+    </div>
+    <div class="card-body">
+        <div class="table-responsive text-nowrap">
+            <table class="table table-responsive">
+
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Instdesc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Instshortdesc)
+                        </th>
+                        <th>
+                            Country @Html.DisplayNameFor(model => model.country)
+                        </th>
+                        <th>
+                            State @Html.DisplayNameFor(model => model.state)
+                        </th>
+                        <th>
+                            City @Html.DisplayNameFor(model => model.city)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Instdesc)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Instshortdesc)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.country)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.state)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.city)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "EditInstitute", new { id = item.Instid }) |
+                                @*@Html.ActionLink("Details", "InstituteDetails", new { id = item.Instid }) |
+                                @Html.ActionLink("Delete", "DeleteInstitute", new { id = item.Instid })*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+
+
+            </table>
+        </div>
+    </div>
+</div>
+
+<br />

@@ -83,6 +83,56 @@
           <Property Name="Updatedt" Type="datetime" />
           <Property Name="ActvStatus" Type="varchar" MaxLength="5" />
         </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" />
+          <Property Name="StateId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Classes">
+          <Key>
+            <PropertyRef Name="Classid" />
+          </Key>
+          <Property Name="Classid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Progid" Type="int" />
+          <Property Name="INSTID" Type="int" />
+          <Property Name="CAMPID" Type="int" />
+          <Property Name="Classname" Type="varchar" MaxLength="100" />
+          <Property Name="Classdescription" Type="text" />
+          <Property Name="Addedby" Type="varchar" MaxLength="50" />
+          <Property Name="AddedDate" Type="datetime" />
+          <Property Name="Updatedby" Type="varchar" MaxLength="50" />
+          <Property Name="Updatedt" Type="datetime" />
+          <Property Name="ActvStatus" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sortname" Type="nvarchar" MaxLength="3" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="FinancialYear">
+          <Key>
+            <PropertyRef Name="FINCID" />
+          </Key>
+          <Property Name="FINCID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INSTID" Type="int" Nullable="false" />
+          <Property Name="CAMPID" Type="int" Nullable="false" />
+          <Property Name="STARTDATE" Type="date" />
+          <Property Name="ENDDATE" Type="date" />
+          <Property Name="STARTMON" Type="varchar" MaxLength="12" />
+          <Property Name="ENDMON" Type="varchar" MaxLength="12" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="100" />
+          <Property Name="ISACTIVE" Type="nvarchar" MaxLength="5" />
+          <Property Name="ADDEDBY" Type="varchar" MaxLength="50" />
+          <Property Name="ADDEDDATE" Type="datetime" />
+          <Property Name="UPDATEDBY" Type="varchar" MaxLength="50" />
+          <Property Name="UPDATEDDT" Type="datetime" />
+        </EntityType>
         <EntityType Name="Institution">
           <Key>
             <PropertyRef Name="Instid" />
@@ -97,6 +147,154 @@
           <Property Name="AddedDate" Type="datetime" />
           <Property Name="Updatedby" Type="varchar" MaxLength="50" />
           <Property Name="Updatedt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Program">
+          <Key>
+            <PropertyRef Name="Progid" />
+          </Key>
+          <Property Name="Progid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProgDesc" Type="varchar" MaxLength="255" />
+          <Property Name="Progshortdesc" Type="varchar" MaxLength="50" />
+          <Property Name="INSTID" Type="int" />
+          <Property Name="CAMPID" Type="int" />
+          <Property Name="Addedby" Type="varchar" MaxLength="50" />
+          <Property Name="AddedDate" Type="datetime" />
+          <Property Name="Updatedby" Type="varchar" MaxLength="50" />
+          <Property Name="Updatedt" Type="datetime" />
+          <Property Name="ActvStatus" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="States">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Terms">
+          <Key>
+            <PropertyRef Name="TermId" />
+          </Key>
+          <Property Name="TermId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TermName" Type="varchar" MaxLength="50" />
+          <Property Name="TermDescription" Type="text" />
+          <Property Name="INSTID" Type="int" />
+          <Property Name="CAMPID" Type="int" />
+          <Property Name="Progid" Type="int" />
+          <Property Name="Addedby" Type="varchar" MaxLength="50" />
+          <Property Name="AddedDate" Type="datetime" />
+          <Property Name="Updatedby" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="ActvStatus" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TTS_SMS.dbo.Campus_vw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Campus_vw">
+          <Key>
+            <PropertyRef Name="Campid" />
+          </Key>
+          <Property Name="Campid" Type="int" Nullable="false" />
+          <Property Name="Instdesc" Type="varchar" MaxLength="255" />
+          <Property Name="Campdesc" Type="varchar" MaxLength="255" />
+          <Property Name="Campshortdesc" Type="varchar" MaxLength="50" />
+          <Property Name="Country" Type="nvarchar" MaxLength="150" />
+          <Property Name="State" Type="nvarchar" MaxLength="30" />
+          <Property Name="city" Type="nvarchar" MaxLength="30" />
+          <Property Name="addedby" Type="nvarchar" MaxLength="256" />
+          <Property Name="AddedDate" Type="datetime" />
+          <Property Name="updatedby" Type="nvarchar" MaxLength="256" />
+          <Property Name="Updatedt" Type="datetime" />
+          <Property Name="ActvStatus" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TTS_SMS.dbo.Class_vw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Class_vw">
+          <Key>
+            <PropertyRef Name="Classid" />
+          </Key>
+          <Property Name="Classid" Type="int" Nullable="false" />
+          <Property Name="ProgDesc" Type="varchar" MaxLength="255" />
+          <Property Name="Instdesc" Type="varchar" MaxLength="255" />
+          <Property Name="Campdesc" Type="varchar" MaxLength="255" />
+          <Property Name="Classname" Type="varchar" MaxLength="100" />
+          <Property Name="Classdescription" Type="text" />
+          <Property Name="Addedby" Type="nvarchar" MaxLength="256" />
+          <Property Name="AddedDate" Type="datetime" />
+          <Property Name="Updatedby" Type="nvarchar" MaxLength="256" />
+          <Property Name="Updatedt" Type="datetime" />
+          <Property Name="ActvStatus" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TTS_SMS.dbo.Financial_vw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Financial_vw">
+          <Key>
+            <PropertyRef Name="FINCID" />
+          </Key>
+          <Property Name="FINCID" Type="int" Nullable="false" />
+          <Property Name="Instdesc" Type="varchar" MaxLength="255" />
+          <Property Name="Campdesc" Type="varchar" MaxLength="255" />
+          <Property Name="STARTDATE" Type="date" />
+          <Property Name="ENDDATE" Type="date" />
+          <Property Name="STARTMON" Type="varchar" MaxLength="12" />
+          <Property Name="ENDMON" Type="varchar" MaxLength="12" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="100" />
+          <Property Name="ISACTIVE" Type="nvarchar" MaxLength="5" />
+          <Property Name="ADDEDBY" Type="nvarchar" MaxLength="256" />
+          <Property Name="ADDEDDATE" Type="datetime" />
+          <Property Name="UPDATEDBY" Type="nvarchar" MaxLength="256" />
+          <Property Name="UPDATEDDT" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TTS_SMS.dbo.Institution_vw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Institution_vw">
+          <Key>
+            <PropertyRef Name="Instid" />
+          </Key>
+          <Property Name="Instid" Type="int" Nullable="false" />
+          <Property Name="Instdesc" Type="varchar" MaxLength="255" />
+          <Property Name="Instshortdesc" Type="varchar" MaxLength="50" />
+          <Property Name="country" Type="nvarchar" MaxLength="150" />
+          <Property Name="state" Type="nvarchar" MaxLength="30" />
+          <Property Name="city" Type="nvarchar" MaxLength="30" />
+          <Property Name="addedby" Type="nvarchar" MaxLength="256" />
+          <Property Name="AddedDate" Type="datetime" />
+          <Property Name="updatedby" Type="nvarchar" MaxLength="256" />
+          <Property Name="Updatedt" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TTS_SMS.dbo.Program_vw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Program_vw">
+          <Key>
+            <PropertyRef Name="Progid" />
+          </Key>
+          <Property Name="Progid" Type="int" Nullable="false" />
+          <Property Name="ProgDesc" Type="varchar" MaxLength="255" />
+          <Property Name="Progshortdesc" Type="varchar" MaxLength="50" />
+          <Property Name="Instdesc" Type="varchar" MaxLength="255" />
+          <Property Name="Campdesc" Type="varchar" MaxLength="255" />
+          <Property Name="Addedby" Type="nvarchar" MaxLength="256" />
+          <Property Name="AddedDate" Type="datetime" />
+          <Property Name="Updatedby" Type="nvarchar" MaxLength="256" />
+          <Property Name="Updatedt" Type="datetime" />
+          <Property Name="ActvStatus" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Term_vw">
+          <Key>
+            <PropertyRef Name="TermId" />
+          </Key>
+          <Property Name="TermId" Type="int" Nullable="false" />
+          <Property Name="TermName" Type="varchar" MaxLength="50" />
+          <Property Name="TermDescription" Type="text" />
+          <Property Name="Instdesc" Type="varchar" MaxLength="255" />
+          <Property Name="Campdesc" Type="varchar" MaxLength="255" />
+          <Property Name="Progid" Type="int" />
+          <Property Name="Addedby" Type="nvarchar" MaxLength="256" />
+          <Property Name="AddedDate" Type="datetime" />
+          <Property Name="Updatedby" Type="nvarchar" MaxLength="256" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="ActvStatus" Type="varchar" MaxLength="5" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -154,6 +352,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_Cities_dbo_States_StateId">
+          <End Role="States" Type="Self.States" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Cities" Type="Self.Cities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="States">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cities">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_States_dbo_Countries_CountryId">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="States" Type="Self.States" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="States">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="TTS_SMSModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -162,7 +388,105 @@
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Campus" EntityType="Self.Campus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FinancialYear" EntityType="Self.FinancialYear" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Institution" EntityType="Self.Institution" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Program" EntityType="Self.Program" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Terms" EntityType="Self.Terms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Campus_vw" EntityType="Self.Campus_vw" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Campus_vw].[Campid] AS [Campid], 
+    [Campus_vw].[Instdesc] AS [Instdesc], 
+    [Campus_vw].[Campdesc] AS [Campdesc], 
+    [Campus_vw].[Campshortdesc] AS [Campshortdesc], 
+    [Campus_vw].[Country] AS [Country], 
+    [Campus_vw].[State] AS [State], 
+    [Campus_vw].[city] AS [city], 
+    [Campus_vw].[addedby] AS [addedby], 
+    [Campus_vw].[AddedDate] AS [AddedDate], 
+    [Campus_vw].[updatedby] AS [updatedby], 
+    [Campus_vw].[Updatedt] AS [Updatedt], 
+    [Campus_vw].[ActvStatus] AS [ActvStatus]
+    FROM [dbo].[Campus_vw] AS [Campus_vw]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Class_vw" EntityType="Self.Class_vw" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Class_vw].[Classid] AS [Classid], 
+    [Class_vw].[ProgDesc] AS [ProgDesc], 
+    [Class_vw].[Instdesc] AS [Instdesc], 
+    [Class_vw].[Campdesc] AS [Campdesc], 
+    [Class_vw].[Classname] AS [Classname], 
+    [Class_vw].[Classdescription] AS [Classdescription], 
+    [Class_vw].[Addedby] AS [Addedby], 
+    [Class_vw].[AddedDate] AS [AddedDate], 
+    [Class_vw].[Updatedby] AS [Updatedby], 
+    [Class_vw].[Updatedt] AS [Updatedt], 
+    [Class_vw].[ActvStatus] AS [ActvStatus]
+    FROM [dbo].[Class_vw] AS [Class_vw]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Financial_vw" EntityType="Self.Financial_vw" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Financial_vw].[FINCID] AS [FINCID], 
+    [Financial_vw].[Instdesc] AS [Instdesc], 
+    [Financial_vw].[Campdesc] AS [Campdesc], 
+    [Financial_vw].[STARTDATE] AS [STARTDATE], 
+    [Financial_vw].[ENDDATE] AS [ENDDATE], 
+    [Financial_vw].[STARTMON] AS [STARTMON], 
+    [Financial_vw].[ENDMON] AS [ENDMON], 
+    [Financial_vw].[DESCRIPTION] AS [DESCRIPTION], 
+    [Financial_vw].[ISACTIVE] AS [ISACTIVE], 
+    [Financial_vw].[ADDEDBY] AS [ADDEDBY], 
+    [Financial_vw].[ADDEDDATE] AS [ADDEDDATE], 
+    [Financial_vw].[UPDATEDBY] AS [UPDATEDBY], 
+    [Financial_vw].[UPDATEDDT] AS [UPDATEDDT]
+    FROM [dbo].[Financial_vw] AS [Financial_vw]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Institution_vw" EntityType="Self.Institution_vw" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Institution_vw].[Instid] AS [Instid], 
+    [Institution_vw].[Instdesc] AS [Instdesc], 
+    [Institution_vw].[Instshortdesc] AS [Instshortdesc], 
+    [Institution_vw].[country] AS [country], 
+    [Institution_vw].[state] AS [state], 
+    [Institution_vw].[city] AS [city], 
+    [Institution_vw].[addedby] AS [addedby], 
+    [Institution_vw].[AddedDate] AS [AddedDate], 
+    [Institution_vw].[updatedby] AS [updatedby], 
+    [Institution_vw].[Updatedt] AS [Updatedt]
+    FROM [dbo].[Institution_vw] AS [Institution_vw]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Program_vw" EntityType="Self.Program_vw" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Program_vw].[Progid] AS [Progid], 
+    [Program_vw].[ProgDesc] AS [ProgDesc], 
+    [Program_vw].[Progshortdesc] AS [Progshortdesc], 
+    [Program_vw].[Instdesc] AS [Instdesc], 
+    [Program_vw].[Campdesc] AS [Campdesc], 
+    [Program_vw].[Addedby] AS [Addedby], 
+    [Program_vw].[AddedDate] AS [AddedDate], 
+    [Program_vw].[Updatedby] AS [Updatedby], 
+    [Program_vw].[Updatedt] AS [Updatedt], 
+    [Program_vw].[ActvStatus] AS [ActvStatus]
+    FROM [dbo].[Program_vw] AS [Program_vw]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Term_vw" EntityType="Self.Term_vw" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Term_vw].[TermId] AS [TermId], 
+    [Term_vw].[TermName] AS [TermName], 
+    [Term_vw].[TermDescription] AS [TermDescription], 
+    [Term_vw].[Instdesc] AS [Instdesc], 
+    [Term_vw].[Campdesc] AS [Campdesc], 
+    [Term_vw].[Progid] AS [Progid], 
+    [Term_vw].[Addedby] AS [Addedby], 
+    [Term_vw].[AddedDate] AS [AddedDate], 
+    [Term_vw].[Updatedby] AS [Updatedby], 
+    [Term_vw].[UpdateDate] AS [UpdateDate], 
+    [Term_vw].[ActvStatus] AS [ActvStatus]
+    FROM [dbo].[Term_vw] AS [Term_vw]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -178,6 +502,14 @@
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Cities_dbo_States_StateId" Association="Self.FK_dbo_Cities_dbo_States_StateId">
+            <End Role="States" EntitySet="States" />
+            <End Role="Cities" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_States_dbo_Countries_CountryId" Association="Self.FK_dbo_States_dbo_Countries_CountryId">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="States" EntitySet="States" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -310,6 +642,27 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
           <EntitySet Name="Campus" EntityType="TTS_SMSModel.Campu" />
+          <EntitySet Name="Cities" EntityType="TTS_SMSModel.City" />
+          <EntitySet Name="Countries" EntityType="TTS_SMSModel.Country" />
+          <EntitySet Name="Programs" EntityType="TTS_SMSModel.Program" />
+          <EntitySet Name="States" EntityType="TTS_SMSModel.State" />
+          <AssociationSet Name="FK_dbo_Cities_dbo_States_StateId" Association="TTS_SMSModel.FK_dbo_Cities_dbo_States_StateId">
+            <End Role="State" EntitySet="States" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_States_dbo_Countries_CountryId" Association="TTS_SMSModel.FK_dbo_States_dbo_Countries_CountryId">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="State" EntitySet="States" />
+          </AssociationSet>
+          <EntitySet Name="Institution_vw" EntityType="TTS_SMSModel.Institution_vw" />
+          <EntitySet Name="Campus_vw" EntityType="TTS_SMSModel.Campus_vw" />
+          <EntitySet Name="Program_vw" EntityType="TTS_SMSModel.Program_vw" />
+          <EntitySet Name="Classes" EntityType="TTS_SMSModel.Class" />
+          <EntitySet Name="FinancialYears" EntityType="TTS_SMSModel.FinancialYear" />
+          <EntitySet Name="Terms" EntityType="TTS_SMSModel.Term" />
+          <EntitySet Name="Class_vw" EntityType="TTS_SMSModel.Class_vw" />
+          <EntitySet Name="Financial_vw" EntityType="TTS_SMSModel.Financial_vw" />
+          <EntitySet Name="Term_vw" EntityType="TTS_SMSModel.Term_vw" />
         </EntityContainer>
         <EntityType Name="Campu">
           <Key>
@@ -326,6 +679,224 @@
           <Property Name="AddedDate" Type="DateTime" Precision="3" />
           <Property Name="Updatedby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Updatedt" Type="DateTime" Precision="3" />
+          <Property Name="ActvStatus" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="StateId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="State" Relationship="TTS_SMSModel.FK_dbo_Cities_dbo_States_StateId" FromRole="City" ToRole="State" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sortname" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="States" Relationship="TTS_SMSModel.FK_dbo_States_dbo_Countries_CountryId" FromRole="Country" ToRole="State" />
+        </EntityType>
+        <EntityType Name="Program">
+          <Key>
+            <PropertyRef Name="Progid" />
+          </Key>
+          <Property Name="Progid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProgDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Progshortdesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="INSTID" Type="Int32" />
+          <Property Name="CAMPID" Type="Int32" />
+          <Property Name="Addedby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AddedDate" Type="DateTime" Precision="3" />
+          <Property Name="Updatedby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Updatedt" Type="DateTime" Precision="3" />
+          <Property Name="ActvStatus" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cities" Relationship="TTS_SMSModel.FK_dbo_Cities_dbo_States_StateId" FromRole="State" ToRole="City" />
+          <NavigationProperty Name="Country" Relationship="TTS_SMSModel.FK_dbo_States_dbo_Countries_CountryId" FromRole="State" ToRole="Country" />
+        </EntityType>
+        <Association Name="FK_dbo_Cities_dbo_States_StateId">
+          <End Type="TTS_SMSModel.State" Role="State" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TTS_SMSModel.City" Role="City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_States_dbo_Countries_CountryId">
+          <End Type="TTS_SMSModel.Country" Role="Country" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TTS_SMSModel.State" Role="State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="State">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Institution_vw">
+          <Key>
+            <PropertyRef Name="Instid" />
+          </Key>
+          <Property Name="Instid" Type="Int32" Nullable="false" />
+          <Property Name="Instdesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Instshortdesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="country" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="addedby" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="AddedDate" Type="DateTime" Precision="3" />
+          <Property Name="updatedby" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Updatedt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Campus_vw">
+          <Key>
+            <PropertyRef Name="Campid" />
+          </Key>
+          <Property Name="Campid" Type="Int32" Nullable="false" />
+          <Property Name="Instdesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Campdesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Campshortdesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="addedby" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="AddedDate" Type="DateTime" Precision="3" />
+          <Property Name="updatedby" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Updatedt" Type="DateTime" Precision="3" />
+          <Property Name="ActvStatus" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Program_vw">
+          <Key>
+            <PropertyRef Name="Progid" />
+          </Key>
+          <Property Name="Progid" Type="Int32" Nullable="false" />
+          <Property Name="ProgDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Progshortdesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Instdesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Campdesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Addedby" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="AddedDate" Type="DateTime" Precision="3" />
+          <Property Name="Updatedby" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Updatedt" Type="DateTime" Precision="3" />
+          <Property Name="ActvStatus" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="Classid" />
+          </Key>
+          <Property Name="Classid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Progid" Type="Int32" />
+          <Property Name="INSTID" Type="Int32" />
+          <Property Name="CAMPID" Type="Int32" />
+          <Property Name="Classname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Classdescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Addedby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AddedDate" Type="DateTime" Precision="3" />
+          <Property Name="Updatedby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Updatedt" Type="DateTime" Precision="3" />
+          <Property Name="ActvStatus" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FinancialYear">
+          <Key>
+            <PropertyRef Name="FINCID" />
+          </Key>
+          <Property Name="FINCID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INSTID" Type="Int32" Nullable="false" />
+          <Property Name="CAMPID" Type="Int32" Nullable="false" />
+          <Property Name="STARTDATE" Type="DateTime" Precision="0" />
+          <Property Name="ENDDATE" Type="DateTime" Precision="0" />
+          <Property Name="STARTMON" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="ENDMON" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ISACTIVE" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="ADDEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ADDEDDATE" Type="DateTime" Precision="3" />
+          <Property Name="UPDATEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATEDDT" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Term">
+          <Key>
+            <PropertyRef Name="TermId" />
+          </Key>
+          <Property Name="TermId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TermName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TermDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="INSTID" Type="Int32" />
+          <Property Name="CAMPID" Type="Int32" />
+          <Property Name="Progid" Type="Int32" />
+          <Property Name="Addedby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AddedDate" Type="DateTime" Precision="3" />
+          <Property Name="Updatedby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="ActvStatus" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Class_vw">
+          <Key>
+            <PropertyRef Name="Classid" />
+          </Key>
+          <Property Name="Classid" Type="Int32" Nullable="false" />
+          <Property Name="ProgDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Instdesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Campdesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Classname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Classdescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Addedby" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="AddedDate" Type="DateTime" Precision="3" />
+          <Property Name="Updatedby" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Updatedt" Type="DateTime" Precision="3" />
+          <Property Name="ActvStatus" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Financial_vw">
+          <Key>
+            <PropertyRef Name="FINCID" />
+          </Key>
+          <Property Name="FINCID" Type="Int32" Nullable="false" />
+          <Property Name="Instdesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Campdesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="STARTDATE" Type="DateTime" Precision="0" />
+          <Property Name="ENDDATE" Type="DateTime" Precision="0" />
+          <Property Name="STARTMON" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="ENDMON" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ISACTIVE" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="ADDEDBY" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ADDEDDATE" Type="DateTime" Precision="3" />
+          <Property Name="UPDATEDBY" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="UPDATEDDT" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Term_vw">
+          <Key>
+            <PropertyRef Name="TermId" />
+          </Key>
+          <Property Name="TermId" Type="Int32" Nullable="false" />
+          <Property Name="TermName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TermDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Instdesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Campdesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Progid" Type="Int32" />
+          <Property Name="Addedby" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="AddedDate" Type="DateTime" Precision="3" />
+          <Property Name="Updatedby" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="ActvStatus" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
@@ -428,6 +999,205 @@
                 <ScalarProperty Name="Campdesc" ColumnName="Campdesc" />
                 <ScalarProperty Name="Instid" ColumnName="Instid" />
                 <ScalarProperty Name="Campid" ColumnName="Campid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="TTS_SMSModel.City">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="TTS_SMSModel.Country">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Sortname" ColumnName="Sortname" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Programs">
+            <EntityTypeMapping TypeName="TTS_SMSModel.Program">
+              <MappingFragment StoreEntitySet="Program">
+                <ScalarProperty Name="ActvStatus" ColumnName="ActvStatus" />
+                <ScalarProperty Name="Updatedt" ColumnName="Updatedt" />
+                <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="Addedby" ColumnName="Addedby" />
+                <ScalarProperty Name="CAMPID" ColumnName="CAMPID" />
+                <ScalarProperty Name="INSTID" ColumnName="INSTID" />
+                <ScalarProperty Name="Progshortdesc" ColumnName="Progshortdesc" />
+                <ScalarProperty Name="ProgDesc" ColumnName="ProgDesc" />
+                <ScalarProperty Name="Progid" ColumnName="Progid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="TTS_SMSModel.State">
+              <MappingFragment StoreEntitySet="States">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Institution_vw">
+            <EntityTypeMapping TypeName="TTS_SMSModel.Institution_vw">
+              <MappingFragment StoreEntitySet="Institution_vw">
+                <ScalarProperty Name="Updatedt" ColumnName="Updatedt" />
+                <ScalarProperty Name="updatedby" ColumnName="updatedby" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="addedby" ColumnName="addedby" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="Instshortdesc" ColumnName="Instshortdesc" />
+                <ScalarProperty Name="Instdesc" ColumnName="Instdesc" />
+                <ScalarProperty Name="Instid" ColumnName="Instid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Campus_vw">
+            <EntityTypeMapping TypeName="TTS_SMSModel.Campus_vw">
+              <MappingFragment StoreEntitySet="Campus_vw">
+                <ScalarProperty Name="ActvStatus" ColumnName="ActvStatus" />
+                <ScalarProperty Name="Updatedt" ColumnName="Updatedt" />
+                <ScalarProperty Name="updatedby" ColumnName="updatedby" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="addedby" ColumnName="addedby" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Campshortdesc" ColumnName="Campshortdesc" />
+                <ScalarProperty Name="Campdesc" ColumnName="Campdesc" />
+                <ScalarProperty Name="Instdesc" ColumnName="Instdesc" />
+                <ScalarProperty Name="Campid" ColumnName="Campid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Program_vw">
+            <EntityTypeMapping TypeName="TTS_SMSModel.Program_vw">
+              <MappingFragment StoreEntitySet="Program_vw">
+                <ScalarProperty Name="ActvStatus" ColumnName="ActvStatus" />
+                <ScalarProperty Name="Updatedt" ColumnName="Updatedt" />
+                <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="Addedby" ColumnName="Addedby" />
+                <ScalarProperty Name="Campdesc" ColumnName="Campdesc" />
+                <ScalarProperty Name="Instdesc" ColumnName="Instdesc" />
+                <ScalarProperty Name="Progshortdesc" ColumnName="Progshortdesc" />
+                <ScalarProperty Name="ProgDesc" ColumnName="ProgDesc" />
+                <ScalarProperty Name="Progid" ColumnName="Progid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Classes">
+            <EntityTypeMapping TypeName="TTS_SMSModel.Class">
+              <MappingFragment StoreEntitySet="Classes">
+                <ScalarProperty Name="ActvStatus" ColumnName="ActvStatus" />
+                <ScalarProperty Name="Updatedt" ColumnName="Updatedt" />
+                <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="Addedby" ColumnName="Addedby" />
+                <ScalarProperty Name="Classdescription" ColumnName="Classdescription" />
+                <ScalarProperty Name="Classname" ColumnName="Classname" />
+                <ScalarProperty Name="CAMPID" ColumnName="CAMPID" />
+                <ScalarProperty Name="INSTID" ColumnName="INSTID" />
+                <ScalarProperty Name="Progid" ColumnName="Progid" />
+                <ScalarProperty Name="Classid" ColumnName="Classid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FinancialYears">
+            <EntityTypeMapping TypeName="TTS_SMSModel.FinancialYear">
+              <MappingFragment StoreEntitySet="FinancialYear">
+                <ScalarProperty Name="UPDATEDDT" ColumnName="UPDATEDDT" />
+                <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
+                <ScalarProperty Name="ADDEDDATE" ColumnName="ADDEDDATE" />
+                <ScalarProperty Name="ADDEDBY" ColumnName="ADDEDBY" />
+                <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="ENDMON" ColumnName="ENDMON" />
+                <ScalarProperty Name="STARTMON" ColumnName="STARTMON" />
+                <ScalarProperty Name="ENDDATE" ColumnName="ENDDATE" />
+                <ScalarProperty Name="STARTDATE" ColumnName="STARTDATE" />
+                <ScalarProperty Name="CAMPID" ColumnName="CAMPID" />
+                <ScalarProperty Name="INSTID" ColumnName="INSTID" />
+                <ScalarProperty Name="FINCID" ColumnName="FINCID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Terms">
+            <EntityTypeMapping TypeName="TTS_SMSModel.Term">
+              <MappingFragment StoreEntitySet="Terms">
+                <ScalarProperty Name="ActvStatus" ColumnName="ActvStatus" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="Addedby" ColumnName="Addedby" />
+                <ScalarProperty Name="Progid" ColumnName="Progid" />
+                <ScalarProperty Name="CAMPID" ColumnName="CAMPID" />
+                <ScalarProperty Name="INSTID" ColumnName="INSTID" />
+                <ScalarProperty Name="TermDescription" ColumnName="TermDescription" />
+                <ScalarProperty Name="TermName" ColumnName="TermName" />
+                <ScalarProperty Name="TermId" ColumnName="TermId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Class_vw">
+            <EntityTypeMapping TypeName="TTS_SMSModel.Class_vw">
+              <MappingFragment StoreEntitySet="Class_vw">
+                <ScalarProperty Name="ActvStatus" ColumnName="ActvStatus" />
+                <ScalarProperty Name="Updatedt" ColumnName="Updatedt" />
+                <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="Addedby" ColumnName="Addedby" />
+                <ScalarProperty Name="Classdescription" ColumnName="Classdescription" />
+                <ScalarProperty Name="Classname" ColumnName="Classname" />
+                <ScalarProperty Name="Campdesc" ColumnName="Campdesc" />
+                <ScalarProperty Name="Instdesc" ColumnName="Instdesc" />
+                <ScalarProperty Name="ProgDesc" ColumnName="ProgDesc" />
+                <ScalarProperty Name="Classid" ColumnName="Classid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Financial_vw">
+            <EntityTypeMapping TypeName="TTS_SMSModel.Financial_vw">
+              <MappingFragment StoreEntitySet="Financial_vw">
+                <ScalarProperty Name="UPDATEDDT" ColumnName="UPDATEDDT" />
+                <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
+                <ScalarProperty Name="ADDEDDATE" ColumnName="ADDEDDATE" />
+                <ScalarProperty Name="ADDEDBY" ColumnName="ADDEDBY" />
+                <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="ENDMON" ColumnName="ENDMON" />
+                <ScalarProperty Name="STARTMON" ColumnName="STARTMON" />
+                <ScalarProperty Name="ENDDATE" ColumnName="ENDDATE" />
+                <ScalarProperty Name="STARTDATE" ColumnName="STARTDATE" />
+                <ScalarProperty Name="Campdesc" ColumnName="Campdesc" />
+                <ScalarProperty Name="Instdesc" ColumnName="Instdesc" />
+                <ScalarProperty Name="FINCID" ColumnName="FINCID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Term_vw">
+            <EntityTypeMapping TypeName="TTS_SMSModel.Term_vw">
+              <MappingFragment StoreEntitySet="Term_vw">
+                <ScalarProperty Name="ActvStatus" ColumnName="ActvStatus" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="Addedby" ColumnName="Addedby" />
+                <ScalarProperty Name="Progid" ColumnName="Progid" />
+                <ScalarProperty Name="Campdesc" ColumnName="Campdesc" />
+                <ScalarProperty Name="Instdesc" ColumnName="Instdesc" />
+                <ScalarProperty Name="TermDescription" ColumnName="TermDescription" />
+                <ScalarProperty Name="TermName" ColumnName="TermName" />
+                <ScalarProperty Name="TermId" ColumnName="TermId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -173,7 +173,11 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\Setups\CampusController.cs" />
+    <Compile Include="Controllers\Setups\DropDownsController.cs" />
+    <Compile Include="Controllers\Setups\FinancialYearController.cs" />
     <Compile Include="Controllers\Setups\InstituteController.cs" />
+    <Compile Include="Controllers\Setups\ProgramsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -193,14 +197,44 @@
     <Compile Include="Models\Campu.cs">
       <DependentUpon>SMS_MODEL.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Campus_vw.cs">
+      <DependentUpon>SMS_MODEL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\City.cs">
+      <DependentUpon>SMS_MODEL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Class.cs">
+      <DependentUpon>SMS_MODEL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Class_vw.cs">
+      <DependentUpon>SMS_MODEL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Country.cs">
+      <DependentUpon>SMS_MODEL.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>SMS_MODEL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FinancialYear.cs">
+      <DependentUpon>SMS_MODEL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Financial_vw.cs">
       <DependentUpon>SMS_MODEL.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Institution.cs">
       <DependentUpon>SMS_MODEL.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Institution_vw.cs">
+      <DependentUpon>SMS_MODEL.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Program.cs">
+      <DependentUpon>SMS_MODEL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Program_vw.cs">
+      <DependentUpon>SMS_MODEL.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SMS_MODEL.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -215,6 +249,15 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SMS_MODEL.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\State.cs">
+      <DependentUpon>SMS_MODEL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Term.cs">
+      <DependentUpon>SMS_MODEL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Term_vw.cs">
+      <DependentUpon>SMS_MODEL.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -725,10 +768,23 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Shared\_footerPartial.cshtml" />
+    <Content Include="Views\Institute\InstituteList.cshtml" />
+    <Content Include="Views\Institute\Createinstitute.cshtml" />
+    <Content Include="Views\Shared\FetchCity.cshtml" />
+    <Content Include="Views\Shared\FetchState.cshtml" />
+    <Content Include="Views\Institute\EditInstitute.cshtml" />
+    <Content Include="Views\Campus\Campuslist.cshtml" />
+    <Content Include="Views\Campus\Addcampus.cshtml" />
+    <Content Include="Views\Campus\EditCampus.cshtml" />
+    <Content Include="Views\Programs\ProgramList.cshtml" />
+    <Content Include="Views\FinancialYear\FYList.cshtml" />
+    <Content Include="Views\FinancialYear\CreateFY.cshtml" />
+    <Content Include="Views\FinancialYear\EditFY.cshtml" />
+    <Content Include="Views\Programs\Addprogram.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Institute\" />
+    <Folder Include="Views\DropDowns\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
