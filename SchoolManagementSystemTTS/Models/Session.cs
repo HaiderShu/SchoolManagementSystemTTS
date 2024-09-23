@@ -12,15 +12,13 @@ namespace SchoolManagementSystemTTS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Financial_vw
+    public partial class Session
     {
-        public int FINCID { get; set; }
-        public string Instdesc { get; set; }
-        public string Campdesc { get; set; }
+        public int SESSIONID { get; set; }
+        public int INSTID { get; set; }
+        public int CAMPID { get; set; }
         public Nullable<System.DateTime> STARTDATE { get; set; }
         public Nullable<System.DateTime> ENDDATE { get; set; }
-        public string STARTMON { get; set; }
-        public string ENDMON { get; set; }
         public string DESCRIPTION { get; set; }
         public string ISACTIVE { get; set; }
         public string ADDEDBY { get; set; }

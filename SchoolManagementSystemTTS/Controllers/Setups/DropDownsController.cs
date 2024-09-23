@@ -29,7 +29,7 @@ namespace SchoolManagementSystemTTS.Controllers.Setups
 		[HttpPost]
 		public JsonResult GetClasses(int campus, int institiute)
 		{
-			var data = db.Classes.Where(x => x.INSTID == institiute).Where(x => x.CAMPID == campus).ToList();
+			var data = db.Classes.Where(x => x.INSTID == institiute).Where(x => x.CAMPID == campus && x.ActvStatus == "1").ToList();
 			var list = new SelectList(data, "Campid", "Campshortdesc");
 
 
@@ -65,7 +65,7 @@ namespace SchoolManagementSystemTTS.Controllers.Setups
 		[HttpPost]
 		public JsonResult GetFy(int campus, int institiute)
 		{
-			var data = db.FinancialYears.Where(x => x.INSTID == institiute).Where(x => x.CAMPID == campus).ToList();
+			var data = db.Sessions.Where(x => x.INSTID == institiute).Where(x => x.CAMPID == campus).ToList();
 			var list = new SelectList(data, "Campid", "Campshortdesc");
 
 
@@ -73,7 +73,7 @@ namespace SchoolManagementSystemTTS.Controllers.Setups
 
 			foreach (var item in data)
 			{
-				dropdown += "<option value='" + item.FINCID + "'>" + @item.DESCRIPTION + "</option>";
+				dropdown += "<option value='" + item.SESSIONID + "'>" + @item.DESCRIPTION + "</option>";
 			}
 			return Json(dropdown, JsonRequestBehavior.AllowGet);
 		}

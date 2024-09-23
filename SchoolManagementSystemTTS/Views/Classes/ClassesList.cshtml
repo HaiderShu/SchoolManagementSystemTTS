@@ -1,0 +1,78 @@
+﻿@model IEnumerable <Class_vw>
+@{
+    ViewBag.Title = "ClassesList";
+}
+
+
+<div class="card mt-3 mb-3">
+    <div class="card-header">
+        <h3 class="text-center"> Class List</h3>
+        <hr />
+    </div>
+    <div class="card-body">
+        <div class="table-responsive text-nowrap">
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Classname)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Classdescription)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Campdesc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ProgDesc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Instdesc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ActvStatus)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Classname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Classdescription)
+                            </td>
+
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Campdesc)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProgDesc)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Instdesc)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ActvStatus)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "EditClasses", new { id = item.Classid }) @*|
+                                @Html.ActionLink("Details", "Details", new { id = item.Classid }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Classid })*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Create New", "AddClasses")
+</p>
+

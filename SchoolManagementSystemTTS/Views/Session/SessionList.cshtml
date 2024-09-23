@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Financial_vw>
+﻿@model IEnumerable<Session_vw>
 
 @{
     ViewBag.Title = "Index";
@@ -6,7 +6,7 @@
 }
 <div class="card mt-3 mb-3">
     <div class="card-header">
-        <h3 class="text-center">Financial Years List</h3>
+        <h3 class="text-center">Session List</h3>
         <hr />
     </div>
     <div class="card-body">
@@ -19,12 +19,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.ENDDATE)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.STARTMON)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ENDMON)
-                    </th>
+
                     <th>
                         @Html.DisplayNameFor(model => model.DESCRIPTION)
                     </th>
@@ -50,12 +45,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.ENDDATE)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.STARTMON)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ENDMON)
-                        </td>
+
                         <td>
                             @Html.DisplayFor(modelItem => item.DESCRIPTION)
                         </td>
@@ -64,13 +54,13 @@
                         </td>
 
                         <td>
-                            @Html.DisplayNameFor(model => model.Campdesc)
+                            @Html.DisplayFor(modelItem => item.Campdesc)
                         </td>
                         <td>
-                            @Html.DisplayNameFor(model => model.Instdesc)
+                            @Html.DisplayFor(modelItem => item.Instdesc)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "EditFY", new { id = item.FINCID }) 
+                            @Html.ActionLink("Edit", "EditSession", new { id = item.SessionID })
                         </td>
                     </tr>
                 }
@@ -82,5 +72,5 @@
 
 
 <p>
-    @Html.ActionLink("Create New", "CreateFY")
+    @Html.ActionLink("Create New", "CreateSession")
 </p>

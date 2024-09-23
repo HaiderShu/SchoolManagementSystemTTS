@@ -2,6 +2,7 @@
 using SchoolManagementSystemTTS.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -10,17 +11,17 @@ using System.Web.UI.WebControls;
 
 namespace SchoolManagementSystemTTS.Controllers.Setups
 {
-	public class FinancialYearController : Controller
+	public class SessionController : Controller
 	{
 		private TTS_SMSEntities db = new TTS_SMSEntities();
 		// GET: FinancialYear
-		public ActionResult FYList()
+		public ActionResult SessionList()
 		{
 
-			return View(db.Financial_vw.ToList());
+			return View(db.Session_vw.ToList());
 		}
 
-		public ActionResult CreateFY()
+		public ActionResult CreateSession()
 		{
 			ViewBag.CAMPID = new SelectList(db.Campus, "Campid", "Campdesc");
 			ViewBag.INSTID = new SelectList(db.Institutions, "Instid", "Instdesc");
@@ -29,7 +30,7 @@ namespace SchoolManagementSystemTTS.Controllers.Setups
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult CreateFY( FinancialYear Fy)
+		public ActionResult CreateSession( Session Fy)
 		{
 			if (ModelState.IsValid)
 			{
@@ -37,14 +38,14 @@ namespace SchoolManagementSystemTTS.Controllers.Setups
 				{
 					Fy.ADDEDDATE = DateTime.Now;
 					Fy.ADDEDBY = User.Identity.GetUserId();
-					db.FinancialYears.Add(Fy);
+					db.Sessions.Add(Fy);
 					db.SaveChanges();
 				}
 				catch (Exception ex)
 				{
 					 
 				}
-				return RedirectToAction("FYList");
+				return RedirectToAction("SessionList");
 			}
 			ViewBag.CAMPID = new SelectList(db.Campus, "Campid", "Campdesc", Fy.CAMPID);
 			ViewBag.INSTID = new SelectList(db.Institutions, "Instid", "Instdesc", Fy.INSTID);
@@ -52,13 +53,13 @@ namespace SchoolManagementSystemTTS.Controllers.Setups
 		}
 
 
-		public ActionResult EditFY(int? id)
+		public ActionResult EditSession(int? id)
 		{
 			if (id == null)
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
-			FinancialYear Fy = db.FinancialYears.Find(id);
+			Session Fy = db.Sessions.Find(id);
 			if (Fy == null)
 			{
 				return HttpNotFound();
@@ -68,6 +69,34 @@ namespace SchoolManagementSystemTTS.Controllers.Setups
 			return View(Fy);
 		}
 
+
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult EditSession(Session Fy)
+		{
+			if (ModelState.IsValid)
+			{
+				try
+				{
+					Fy.UPDATEDBY =  User.Identity.GetUserId();
+					Fy.UPDATEDDT = DateTime.Now;
+					
+					db.Entry(Fy).State = EntityState.Modified;
+					db.SaveChanges();
+					 
+				}
+				catch (Exception ex)
+				{
+					return View(Fy);
+				}
+
+				return RedirectToAction("SessionList");
+			}
+			ViewBag.CAMPID = new SelectList(db.Campus.Where(x => x.Instid == Fy.INSTID), "Campid", "Campdesc", Fy.CAMPID);
+			ViewBag.INSTID = new SelectList(db.Institutions, "Instid", "Instdesc", Fy.INSTID);
+			return View(Fy);
+		}
 
 
 

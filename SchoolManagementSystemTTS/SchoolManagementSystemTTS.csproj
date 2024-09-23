@@ -171,17 +171,29 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdmissionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\Setups\CampusController.cs" />
+    <Compile Include="Controllers\Setups\ClassesController.cs" />
     <Compile Include="Controllers\Setups\DropDownsController.cs" />
-    <Compile Include="Controllers\Setups\FinancialYearController.cs" />
+    <Compile Include="Controllers\Setups\SessionController.cs" />
     <Compile Include="Controllers\Setups\InstituteController.cs" />
     <Compile Include="Controllers\Setups\ProgramsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HelperClasses\ImageUpload.cs" />
+    <Compile Include="Models\AcadStatu.cs">
+      <DependentUpon>SMS_MODEL.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Admission_mst.cs">
+      <DependentUpon>SMS_MODEL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Admission_vw.cs">
+      <DependentUpon>SMS_MODEL.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AspNetRole.cs">
       <DependentUpon>SMS_MODEL.tt</DependentUpon>
     </Compile>
@@ -215,10 +227,7 @@
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>SMS_MODEL.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\FinancialYear.cs">
-      <DependentUpon>SMS_MODEL.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Financial_vw.cs">
+    <Compile Include="Models\Domicile.cs">
       <DependentUpon>SMS_MODEL.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -233,6 +242,15 @@
       <DependentUpon>SMS_MODEL.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Program_vw.cs">
+      <DependentUpon>SMS_MODEL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Religion.cs">
+      <DependentUpon>SMS_MODEL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Session.cs">
+      <DependentUpon>SMS_MODEL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Session_vw.cs">
       <DependentUpon>SMS_MODEL.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SMS_MODEL.Context.cs">
@@ -319,6 +337,7 @@
     <Content Include="assets\js\ui-modals.js" />
     <Content Include="assets\js\ui-popover.js" />
     <Content Include="assets\js\ui-toasts.js" />
+    <Content Include="assets\StudentImage\no-image.jpg" />
     <Content Include="assets\UserProfiles\116984854.png" />
     <Content Include="assets\UserProfiles\158004651.png" />
     <Content Include="assets\UserProfiles\160519061.png" />
@@ -777,10 +796,17 @@
     <Content Include="Views\Campus\Addcampus.cshtml" />
     <Content Include="Views\Campus\EditCampus.cshtml" />
     <Content Include="Views\Programs\ProgramList.cshtml" />
-    <Content Include="Views\FinancialYear\FYList.cshtml" />
-    <Content Include="Views\FinancialYear\CreateFY.cshtml" />
-    <Content Include="Views\FinancialYear\EditFY.cshtml" />
     <Content Include="Views\Programs\Addprogram.cshtml" />
+    <Content Include="Views\Programs\EditProgram.cshtml" />
+    <Content Include="Views\Classes\ClassesList.cshtml" />
+    <Content Include="Views\Classes\AddClasses.cshtml" />
+    <Content Include="Views\Classes\EditClasses.cshtml" />
+    <Content Include="Views\Admission\AdmissionForm.cshtml" />
+    <Content Include="Views\Session\CreateSession.cshtml" />
+    <Content Include="Views\Session\SessionList.cshtml" />
+    <Content Include="Views\Session\EditSession.cshtml" />
+    <Content Include="Views\Admission\updateAdmissionForm.cshtml" />
+    <Content Include="Views\Admission\AdmissionList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

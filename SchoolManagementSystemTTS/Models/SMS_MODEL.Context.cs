@@ -40,10 +40,15 @@ namespace SchoolManagementSystemTTS.Models
         public virtual DbSet<Campus_vw> Campus_vw { get; set; }
         public virtual DbSet<Program_vw> Program_vw { get; set; }
         public virtual DbSet<Class> Classes { get; set; }
-        public virtual DbSet<FinancialYear> FinancialYears { get; set; }
         public virtual DbSet<Term> Terms { get; set; }
         public virtual DbSet<Class_vw> Class_vw { get; set; }
-        public virtual DbSet<Financial_vw> Financial_vw { get; set; }
         public virtual DbSet<Term_vw> Term_vw { get; set; }
+        public virtual DbSet<Domicile> Domiciles { get; set; }
+        public virtual DbSet<Religion> Religions { get; set; }
+        public virtual DbSet<Admission_mst> Admission_mst { get; set; }
+        public virtual DbSet<Session> Sessions { get; set; }
+        public virtual DbSet<Session_vw> Session_vw { get; set; }
+        public virtual DbSet<AcadStatu> AcadStatus { get; set; }
+        public virtual DbSet<Admission_vw> Admission_vw { get; set; }
     }
 }

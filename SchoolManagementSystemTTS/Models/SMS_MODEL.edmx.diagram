@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fdab4f52c0bc4aa1ba093a73e28e02ee" Name="Diagram1" ZoomLevel="67">
+      <Diagram DiagramId="fdab4f52c0bc4aa1ba093a73e28e02ee" Name="Diagram1" ZoomLevel="59">
         <EntityTypeShape EntityType="TTS_SMSModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TTS_SMSModel.AspNetRole" Width="1.5" PointX="1" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TTS_SMSModel.AspNetUserClaim" Width="1.5" PointX="5.375" PointY="0.75" IsExpanded="true" />
@@ -25,11 +25,16 @@
         <EntityTypeShape EntityType="TTS_SMSModel.Campus_vw" Width="1.5" PointX="9.375" PointY="0.75" />
         <EntityTypeShape EntityType="TTS_SMSModel.Program_vw" Width="1.5" PointX="1.375" PointY="11.75" />
         <EntityTypeShape EntityType="TTS_SMSModel.Class" Width="1.5" PointX="10.375" PointY="7.75" />
-        <EntityTypeShape EntityType="TTS_SMSModel.FinancialYear" Width="1.5" PointX="3.375" PointY="11.75" />
         <EntityTypeShape EntityType="TTS_SMSModel.Term" Width="1.5" PointX="11.375" PointY="0.75" />
         <EntityTypeShape EntityType="TTS_SMSModel.Class_vw" Width="1.5" PointX="5.375" PointY="11.75" />
-        <EntityTypeShape EntityType="TTS_SMSModel.Financial_vw" Width="1.5" PointX="7.375" PointY="11.75" />
         <EntityTypeShape EntityType="TTS_SMSModel.Term_vw" Width="1.5" PointX="9.375" PointY="11.75" />
+        <EntityTypeShape EntityType="TTS_SMSModel.Domicile" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="TTS_SMSModel.Religion" Width="1.5" PointX="13.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TTS_SMSModel.Admission_mst" Width="1.5" PointX="0.75" PointY="15.75" />
+        <EntityTypeShape EntityType="TTS_SMSModel.Session" Width="1.5" PointX="3.375" PointY="15.75" />
+        <EntityTypeShape EntityType="TTS_SMSModel.Session_vw" Width="1.5" PointX="15.375" PointY="3.75" />
+        <EntityTypeShape EntityType="TTS_SMSModel.AcadStatu" Width="1.5" PointX="11.375" PointY="11.75" />
+        <EntityTypeShape EntityType="TTS_SMSModel.Admission_vw" Width="1.5" PointX="13.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

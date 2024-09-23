@@ -1,0 +1,329 @@
+﻿@model Admission_mst
+@{
+    TTS_SMSEntities db = new TTS_SMSEntities();
+    ViewBag.Title = "AdmissionForm";
+    ViewBag.Countid = new SelectList(db.Countries, "Id", "Name");
+    ViewBag.Instid = new SelectList(db.Institutions, "Instid", "Instdesc");
+    ViewBag.CAMPID = new SelectList(db.Campus, "Campid", "Campdesc");
+    ViewBag.Classes = new SelectList(db.Classes, "Classid", "Classdescription");
+    ViewBag.FinancYear = new SelectList(db.Sessions, "SESSIONID", "DESCRIPTION");
+    //ViewBag.CLASS_SECTION = new SelectList(, "section_val", "section_name");
+    ViewBag.Religion = new SelectList(db.Religions, "RELIGIONID", "NAME");
+    ViewBag.Domicile = new SelectList(db.Domiciles, "DOMID", "DESCR");
+}
+
+
+<h4 class="text-success mt-2">@Html.Raw(TempData["success"])</h4>
+<h4 class="text-danger mt-3">@Html.Raw(TempData["failed"])</h4>
+@using (Ajax.BeginForm("AdmissionForm", "Admission", FormMethod.Post,
+             new AjaxOptions
+             {
+                 OnSuccess = "OnSuccess",
+                 OnFailure = "OnFailure",
+                 LoadingElementId = "progress"
+             }, new { enctype = "multipart/form-data" }))
+{
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="card mb-4">
+        <h5 class="card-header">Student's Information:</h5>
+        <!-- Account -->
+        <hr class="my-0" />
+        <br />
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <label class="form-label">Student Image</label>
+                    <div id="upload-image-preview" style="width:200px; height:200px; border:1px solid #8e8c8c; border-radius:4px; box-shadow:2px 3px 2px #c1c0c0; margin-bottom:10px;">
+
+                        <img id="blah" src="~/assests/imgs/blank.png" alt="No Image Selected" style="width:190px; height:190px;width:200px; height:200px; border:1px solid #8e8c8c; border-radius:4px; box-shadow:2px 3px 2px #c1c0c0; margin-bottom:10px;" />
+                        <script>
+                            function readURL(input) {
+                                if (input.files && input.files[0]) {
+                                    var reader = new FileReader();
+
+                                    reader.onload = function (e) {
+                                        $('#blah')
+                                            .attr('src', e.target.result)
+                                            .width(200)
+                                            .height(200);
+                                    };
+                                    reader.readAsDataURL(input.files[0]);
+                                }
+                            }
+                        </script>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        @Html.TextBoxFor(model => model.USER_IMG, new { @class = "form-control-file", name = "file", id = "file", type = "file", onchange = "readURL(this);" })
+                        @Html.ValidationMessageFor(model => model.USER_IMG, "", new { @class = "text-danger" }) @*//, @id = "picmessage"*@
+                        <p style="font-size:14px">
+                            *Upload your passport size photo <br />
+                            *Photo size must be less than 4 MB
+                        </p>
+                        <p style="font-size:14px">
+                            <b>Instructions:</b> You can lower down (resize) the size of your photo/document via Microsoft Paint by following the steps given below.<br />
+                            <b>Step 1:</b> Right click on your document and select Open with Paint.<br />
+                            <b>Step 2:</b> Click on the Resize option in Paint and reduce Horizontal and Vertical size accordingly.<br />
+                            <b>Step 3:</b> Click OK and Save your document. You can check the size of your document by right clicking on document Properties.<br />
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+
+                <div class="mb-2 col-md-3">
+                    <label class="form-label">Institute</label>
+                    @Html.DropDownListFor(model => model.INSTID, (IEnumerable<SelectListItem>)ViewBag.INSTID, "Please Select", new { @class = "form-control", @id = "institute" })
+                    @Html.ValidationMessageFor(model => model.INSTID, "", new { @class = "text-danger" })
+                </div>
+                <div class="mb-2 col-md-3">
+                    <label class="form-label">Campus</label>
+                    @Html.DropDownListFor(model => model.CAMPID, new SelectList(""), "----Select-----", new { @class = "form-control", @id = "campus" })
+                    @Html.ValidationMessageFor(model => model.CAMPID, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-2 col-md-3">
+                    <label class="form-label">Session</label>
+                    @Html.DropDownListFor(model => model.SESSION_YEAR, (IEnumerable<SelectListItem>)ViewBag.FinancYear, "Please Select", new { @class = "form-control", @id = "sessionYear" })
+                    @Html.ValidationMessageFor(model => model.SESSION_YEAR, "", new { @class = "text-danger" })
+                </div>
+                <div class="mb-2 col-md-3">
+                    <label class="form-label">Applied For Class</label>
+                    @Html.DropDownListFor(model => model.APPLIED_FOR_CLASS, new SelectList(""), "Please Select", new { @class = "form-control", @id = "Class" })
+                    @Html.ValidationMessageFor(model => model.APPLIED_FOR_CLASS, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3 col-md-3">
+                    <label for="firstName" class="form-label">Form No</label>
+                    @Html.EditorFor(model => model.FORM_NO, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FORM_NO, "", new { @class = "text-danger" })
+                </div>
+                @*<div class="mb-3 col-md-3">
+                    <label for="lastName" class="form-label">Submit Date</label>
+                    @Html.EditorFor(model => model.SUBMITTED_DT, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                    @Html.ValidationMessageFor(model => model.SUBMITTED_DT, "", new { @class = "text-danger" })
+                </div>*@
+                <div class="mb-3 col-md-3">
+                    <label for="email" class="form-label">First Name</label>
+                    @Html.EditorFor(model => model.FIRST_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FIRST_NAME, "", new { @class = "text-danger" })
+                </div>
+                <div class="mb-3 col-md-3">
+                    <label class="form-label">Middle Name</label>
+                    @Html.EditorFor(model => model.MIDDLE_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MIDDLE_NAME, "", new { @class = "text-danger" })
+                </div>
+                <div class="mb-2 col-md-3">
+                    <label class="form-label">last Name</label>
+                    @Html.EditorFor(model => model.LAST_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LAST_NAME, "", new { @class = "text-danger" })
+                </div>
+                <div class="mb-2 col-md-3">
+                    <label class="form-label">Date Of Birth</label>
+                    @Html.EditorFor(model => model.DATE_OF_BIRTH, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                    @Html.ValidationMessageFor(model => model.DATE_OF_BIRTH, "", new { @class = "text-danger" })
+                </div>
+                <div class="mb-2 col-md-3">
+                    <label for="state" class="form-label">Religion</label>
+                    @Html.DropDownListFor(model => model.RELIGION, (IEnumerable<SelectListItem>)ViewBag.Religion, "Please Select", new { @class = "form-control form-select" })
+
+                    @Html.ValidationMessageFor(model => model.RELIGION, "", new { @class = "text-danger" })
+                </div>
+                <div class="mb-2 col-md-3">
+                    <label for="zipCode" class="form-label">Domicile</label>
+
+                    @Html.DropDownListFor(model => model.DOMICILE, (IEnumerable<SelectListItem>)ViewBag.Domicile, "Please Select", new { @class = "form-control form-select" })
+                    @Html.ValidationMessageFor(model => model.DOMICILE, "", new { @class = "text-danger" })
+                </div>
+                <div class="mb-2 col-md-3">
+                    <label class="form-label" for="country">Gender</label>
+                    @Html.DropDownListFor(model => model.GENDER, new List<SelectListItem> { new SelectListItem { Value = "m", Text = "Male" }, new SelectListItem { Value = "f", Text = "Female" } }, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.GENDER, "", new { @class = "text-danger" })
+                </div>
+                <div class="mb-2 col-md-3">
+                    <label for="language" class="form-label">Identification Mark</label>
+                    @Html.EditorFor(model => model.IDENTIFICATION_MARK, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.IDENTIFICATION_MARK, "", new { @class = "text-danger" })
+                </div>
+                <div class="mb-2 col-md-3">
+                    <label for="timeZones" class="form-label">Address 1</label>
+                    @Html.EditorFor(model => model.ADDRESS1, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ADDRESS1, "", new { @class = "text-danger" })
+                </div>
+                <div class="mb-2 col-md-3">
+                    <label class="form-label"> Student B-Form/NIC</label>
+                    @Html.EditorFor(model => model.STD_CNIC, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.STD_CNIC, "", new { @class = "text-danger" })
+                </div>
+
+
+
+                <div class="mb-2 col-md-3">
+                    <label class="form-label"> Remarks</label>
+                    @Html.EditorFor(model => model.REMARKS, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.REMARKS, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-2 col-md-3">
+                    <label class="form-label">Country</label>
+                    @Html.DropDownListFor(model => model.Countid, (IEnumerable<SelectListItem>)ViewBag.Countid, "Please Select Country Name", new { @class = "form-control form-select", @id = "country" })
+
+                    @Html.ValidationMessageFor(model => model.Countid, "", new { @class = "text-danger" })
+                </div>
+                <div class="mb-2 col-md-3">
+                    <label class="form-label">State</label>
+                    @Html.DropDownListFor(model => model.Stateid, new SelectList(""), "Please select State Name", new { @class = "form-control", disabled = "disabled", @id = "state" })
+                    @Html.ValidationMessageFor(model => model.Stateid, "", new { @class = "text-danger" })
+                </div>
+                <div class="mb-2 col-md-3">
+                    <label class="form-label"> City</label>
+                    @Html.DropDownListFor(model => model.Cityid, new SelectList(""), "Please select City Name", new { @class = "form-control", disabled = "disabled", @id = "city" })
+                    @Html.ValidationMessageFor(model => model.Cityid, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+        </div>
+        <!-- /Account -->
+    </div>
+
+
+
+    <div class="card mb-4">
+        <h5 class="card-header">Parent/Guardian Information:</h5>
+        <!-- Account -->
+        <hr class="my-0" />
+        <div class="card-body">
+            <div class="row">
+                <div class="mb-3 col-md-3">
+                    <label for="firstName" class="form-label">Father First Name</label>
+                    @Html.EditorFor(model => model.FTHR_FNAME, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FTHR_FNAME, "", new { @class = "text-danger" })
+                </div>
+                <div class="mb-3 col-md-3">
+                    <label for="lastName" class="form-label">Middle Name </label>
+                    @Html.EditorFor(model => model.FTHR_MNAME, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FTHR_MNAME, "", new { @class = "text-danger" })
+                </div>
+                <div class="mb-3 col-md-3">
+                    <label for="email" class="form-label">Last Name</label>
+                    @Html.EditorFor(model => model.FTHR_LNAME, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FTHR_LNAME, "", new { @class = "text-danger" })
+                </div>
+                <div class="mb-3 col-md-3">
+                    <label class="form-label">NIC No.</label>
+                    @Html.EditorFor(model => model.FTHR_CNIC, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FTHR_CNIC, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div class="mb-2 col-md-3">
+                    <label class="form-label"> Occupation: </label>
+                    @Html.EditorFor(model => model.OCCUPATION, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.OCCUPATION, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="mb-2 col-md-3">
+                    <label class="form-label">
+                        Mobile No:
+                    </label>
+                    @Html.EditorFor(model => model.PHONE, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PHONE, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <!-- /Account -->
+        <br />
+
+
+    </div>
+
+
+  
+
+    <button class="btn btn-primary btn-lg text-center float-end" type="submit">Save</button>
+}
+
+
+
+<script>
+    $("#institute").change(function () {
+        var InstID = $('#institute').val();
+        debugger;
+        $.ajax({
+            type: 'POST',
+            url: '/DropDowns/GetCampus?id=' + InstID,  // Replace with your actual API endpoint URL
+            contentType: 'application/json',
+            success: function (response) {
+                debugger;
+                if (response != "") {
+                    // Handle a successful response from the server
+                    $("#campus").empty();
+                    $("#Class").empty();
+                    $("#sessionYear").empty();
+                    $("#campus").append(response);
+                }
+
+            },
+            error: function (error) {
+                // Handle errors
+                console.error(error);
+            }
+        });
+    });
+
+
+    $("#campus").change(function () {
+        var campus = $('#campus').val();
+        var InstID = $('#institute').val();
+        debugger;
+        $.ajax({
+            type: 'POST',
+            url: '/DropDowns/GetClasses?campus=' + campus + "&institiute=" + InstID, // Replace with your actual API endpoint URL
+            contentType: 'application/json',
+            success: function (response) {
+                debugger;
+                if (response != "") {
+                    // Handle a successful response from the server
+                    $("#Class").empty();
+                    $("#Class").append(response);
+                }
+
+            },
+            error: function (error) {
+                // Handle errors
+                console.error(error);
+            }
+        });
+
+
+        $.ajax({
+            type: 'POST',
+            url: '/DropDowns/GetFy?campus=' + campus + "&institiute=" + InstID, // Replace with your actual API endpoint URL
+            contentType: 'application/json',
+            success: function (response) {
+                debugger;
+                if (response != "") {
+                    // Handle a successful response from the server
+                    $("#sessionYear").empty();
+                    $("#sessionYear").append(response);
+                }
+
+            },
+            error: function (error) {
+                // Handle errors
+                console.error(error);
+            }
+        });
+
+
+
+
+
+    });
+</script>

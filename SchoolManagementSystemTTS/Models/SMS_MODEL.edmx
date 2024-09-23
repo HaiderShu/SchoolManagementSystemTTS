@@ -15,6 +15,54 @@
           <Property Name="Model" Type="varbinary(max)" Nullable="false" />
           <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TTS_SMS.dbo.AcadStatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AcadStatus">
+          <Key>
+            <PropertyRef Name="Status_ID" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="Status_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Admission_mst">
+          <Key>
+            <PropertyRef Name="Adms_ID" />
+          </Key>
+          <Property Name="Adms_ID" Type="int" Nullable="false" />
+          <Property Name="INSTID" Type="int" />
+          <Property Name="CAMPID" Type="int" />
+          <Property Name="FORM_NO" Type="nvarchar" MaxLength="11" />
+          <Property Name="SUBMITTED_DT" Type="datetime" />
+          <Property Name="FIRST_NAME" Type="nvarchar" MaxLength="30" />
+          <Property Name="MIDDLE_NAME" Type="nvarchar" MaxLength="30" />
+          <Property Name="LAST_NAME" Type="nvarchar" MaxLength="30" />
+          <Property Name="DATE_OF_BIRTH" Type="datetime" />
+          <Property Name="RELIGION" Type="nvarchar" MaxLength="4" />
+          <Property Name="DOMICILE" Type="nvarchar" MaxLength="10" />
+          <Property Name="GENDER" Type="nvarchar" MaxLength="50" />
+          <Property Name="IDENTIFICATION_MARK" Type="nvarchar" MaxLength="30" />
+          <Property Name="USER_IMG" Type="nvarchar" MaxLength="255" />
+          <Property Name="ADDRESS1" Type="nvarchar" MaxLength="55" />
+          <Property Name="ACAD_STATUS" Type="nvarchar" MaxLength="10" />
+          <Property Name="Cityid" Type="int" />
+          <Property Name="Stateid" Type="int" />
+          <Property Name="Countid" Type="int" />
+          <Property Name="FTHR_FNAME" Type="nvarchar" MaxLength="30" />
+          <Property Name="FTHR_MNAME" Type="nvarchar" MaxLength="30" />
+          <Property Name="FTHR_LNAME" Type="nvarchar" MaxLength="30" />
+          <Property Name="STD_CNIC" Type="nvarchar" MaxLength="30" />
+          <Property Name="FTHR_CNIC" Type="nvarchar" MaxLength="30" />
+          <Property Name="OCCUPATION" Type="nvarchar" MaxLength="40" />
+          <Property Name="SESSION_YEAR" Type="int" />
+          <Property Name="APPLIED_FOR_CLASS" Type="int" />
+          <Property Name="PHONE" Type="nvarchar" MaxLength="24" />
+          <Property Name="REMARKS" Type="nvarchar" MaxLength="255" />
+          <Property Name="ADDEDBY" Type="varchar" MaxLength="50" />
+          <Property Name="ADDEDDATE" Type="datetime" />
+          <Property Name="UPDATEDBY" Type="varchar" MaxLength="50" />
+          <Property Name="UPDATEDATE" Type="datetime" />
+        </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -115,23 +163,13 @@
           <Property Name="Sortname" Type="nvarchar" MaxLength="3" />
           <Property Name="Name" Type="nvarchar" MaxLength="150" />
         </EntityType>
-        <EntityType Name="FinancialYear">
+        <EntityType Name="Domicile">
           <Key>
-            <PropertyRef Name="FINCID" />
+            <PropertyRef Name="DOMID" />
           </Key>
-          <Property Name="FINCID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="INSTID" Type="int" Nullable="false" />
-          <Property Name="CAMPID" Type="int" Nullable="false" />
-          <Property Name="STARTDATE" Type="date" />
-          <Property Name="ENDDATE" Type="date" />
-          <Property Name="STARTMON" Type="varchar" MaxLength="12" />
-          <Property Name="ENDMON" Type="varchar" MaxLength="12" />
-          <Property Name="DESCRIPTION" Type="varchar" MaxLength="100" />
-          <Property Name="ISACTIVE" Type="nvarchar" MaxLength="5" />
-          <Property Name="ADDEDBY" Type="varchar" MaxLength="50" />
-          <Property Name="ADDEDDATE" Type="datetime" />
-          <Property Name="UPDATEDBY" Type="varchar" MaxLength="50" />
-          <Property Name="UPDATEDDT" Type="datetime" />
+          <Property Name="DOMID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CODE" Type="nvarchar" MaxLength="50" />
+          <Property Name="DESCR" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Institution">
           <Key>
@@ -163,6 +201,29 @@
           <Property Name="Updatedt" Type="datetime" />
           <Property Name="ActvStatus" Type="varchar" MaxLength="5" />
         </EntityType>
+        <EntityType Name="Religion">
+          <Key>
+            <PropertyRef Name="RELIGIONID" />
+          </Key>
+          <Property Name="RELIGIONID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Sessions">
+          <Key>
+            <PropertyRef Name="SESSIONID" />
+          </Key>
+          <Property Name="SESSIONID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INSTID" Type="int" Nullable="false" />
+          <Property Name="CAMPID" Type="int" Nullable="false" />
+          <Property Name="STARTDATE" Type="date" />
+          <Property Name="ENDDATE" Type="date" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="100" />
+          <Property Name="ISACTIVE" Type="nvarchar" MaxLength="5" />
+          <Property Name="ADDEDBY" Type="varchar" MaxLength="50" />
+          <Property Name="ADDEDDATE" Type="datetime" />
+          <Property Name="UPDATEDBY" Type="varchar" MaxLength="50" />
+          <Property Name="UPDATEDDT" Type="datetime" />
+        </EntityType>
         <EntityType Name="States">
           <Key>
             <PropertyRef Name="Id" />
@@ -188,6 +249,46 @@
           <Property Name="ActvStatus" Type="varchar" MaxLength="5" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'TTS_SMS.dbo.Admission_vw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Admission_vw">
+          <Key>
+            <PropertyRef Name="Adms_ID" />
+            <PropertyRef Name="FullName" />
+            <PropertyRef Name="GENDER" />
+          </Key>
+          <Property Name="Adms_ID" Type="int" Nullable="false" />
+          <Property Name="Institute" Type="varchar" MaxLength="255" />
+          <Property Name="Campus" Type="varchar" MaxLength="255" />
+          <Property Name="FORM_NO" Type="nvarchar" MaxLength="11" />
+          <Property Name="SUBMITTED_DT" Type="datetime" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="92" Nullable="false" />
+          <Property Name="DATE_OF_BIRTH" Type="datetime" />
+          <Property Name="RELIGION" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOMICILE" Type="nvarchar" MaxLength="50" />
+          <Property Name="GENDER" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="IDENTIFICATION_MARK" Type="nvarchar" MaxLength="30" />
+          <Property Name="USER_IMG" Type="nvarchar" MaxLength="255" />
+          <Property Name="ADDRESS1" Type="nvarchar" MaxLength="55" />
+          <Property Name="ACAD_STATUS" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cityid" Type="nvarchar" MaxLength="30" />
+          <Property Name="Stateid" Type="nvarchar" MaxLength="30" />
+          <Property Name="Countid" Type="nvarchar" MaxLength="150" />
+          <Property Name="FTHR_FNAME" Type="nvarchar" MaxLength="30" />
+          <Property Name="FTHR_MNAME" Type="nvarchar" MaxLength="30" />
+          <Property Name="FTHR_LNAME" Type="nvarchar" MaxLength="30" />
+          <Property Name="STD_CNIC" Type="nvarchar" MaxLength="30" />
+          <Property Name="FTHR_CNIC" Type="nvarchar" MaxLength="30" />
+          <Property Name="OCCUPATION" Type="nvarchar" MaxLength="40" />
+          <Property Name="session" Type="varchar" MaxLength="100" />
+          <Property Name="Class" Type="text" />
+          <Property Name="PHONE" Type="nvarchar" MaxLength="24" />
+          <Property Name="REMARKS" Type="nvarchar" MaxLength="255" />
+          <Property Name="ADDEDBY" Type="nvarchar" MaxLength="256" />
+          <Property Name="ADDEDDATE" Type="datetime" />
+          <Property Name="UPDATEDBY" Type="nvarchar" MaxLength="256" />
+          <Property Name="UPDATEDATE" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'TTS_SMS.dbo.Campus_vw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Campus_vw">
           <Key>
@@ -211,6 +312,7 @@ warning 6002: The table/view 'TTS_SMS.dbo.Class_vw' does not have a primary key 
         <EntityType Name="Class_vw">
           <Key>
             <PropertyRef Name="Classid" />
+            
           </Key>
           <Property Name="Classid" Type="int" Nullable="false" />
           <Property Name="ProgDesc" Type="varchar" MaxLength="255" />
@@ -222,27 +324,7 @@ warning 6002: The table/view 'TTS_SMS.dbo.Class_vw' does not have a primary key 
           <Property Name="AddedDate" Type="datetime" />
           <Property Name="Updatedby" Type="nvarchar" MaxLength="256" />
           <Property Name="Updatedt" Type="datetime" />
-          <Property Name="ActvStatus" Type="varchar" MaxLength="5" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'TTS_SMS.dbo.Financial_vw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Financial_vw">
-          <Key>
-            <PropertyRef Name="FINCID" />
-          </Key>
-          <Property Name="FINCID" Type="int" Nullable="false" />
-          <Property Name="Instdesc" Type="varchar" MaxLength="255" />
-          <Property Name="Campdesc" Type="varchar" MaxLength="255" />
-          <Property Name="STARTDATE" Type="date" />
-          <Property Name="ENDDATE" Type="date" />
-          <Property Name="STARTMON" Type="varchar" MaxLength="12" />
-          <Property Name="ENDMON" Type="varchar" MaxLength="12" />
-          <Property Name="DESCRIPTION" Type="varchar" MaxLength="100" />
-          <Property Name="ISACTIVE" Type="nvarchar" MaxLength="5" />
-          <Property Name="ADDEDBY" Type="nvarchar" MaxLength="256" />
-          <Property Name="ADDEDDATE" Type="datetime" />
-          <Property Name="UPDATEDBY" Type="nvarchar" MaxLength="256" />
-          <Property Name="UPDATEDDT" Type="datetime" />
+          <Property Name="ActvStatus" Type="varchar" MaxLength="8" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'TTS_SMS.dbo.Institution_vw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -266,6 +348,7 @@ warning 6002: The table/view 'TTS_SMS.dbo.Program_vw' does not have a primary ke
         <EntityType Name="Program_vw">
           <Key>
             <PropertyRef Name="Progid" />
+            
           </Key>
           <Property Name="Progid" Type="int" Nullable="false" />
           <Property Name="ProgDesc" Type="varchar" MaxLength="255" />
@@ -276,7 +359,25 @@ warning 6002: The table/view 'TTS_SMS.dbo.Program_vw' does not have a primary ke
           <Property Name="AddedDate" Type="datetime" />
           <Property Name="Updatedby" Type="nvarchar" MaxLength="256" />
           <Property Name="Updatedt" Type="datetime" />
-          <Property Name="ActvStatus" Type="varchar" MaxLength="5" />
+          <Property Name="ActvStatus" Type="varchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TTS_SMS.dbo.Session_vw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Session_vw">
+          <Key>
+            <PropertyRef Name="SessionID" />
+          </Key>
+          <Property Name="SessionID" Type="int" Nullable="false" />
+          <Property Name="Instdesc" Type="varchar" MaxLength="255" />
+          <Property Name="Campdesc" Type="varchar" MaxLength="255" />
+          <Property Name="STARTDATE" Type="date" />
+          <Property Name="ENDDATE" Type="date" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="100" />
+          <Property Name="ISACTIVE" Type="nvarchar" MaxLength="5" />
+          <Property Name="ADDEDBY" Type="nvarchar" MaxLength="256" />
+          <Property Name="ADDEDDATE" Type="datetime" />
+          <Property Name="UPDATEDBY" Type="nvarchar" MaxLength="256" />
+          <Property Name="UPDATEDDT" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -382,6 +483,7 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
         </Association>
         <EntityContainer Name="TTS_SMSModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Admission_mst" EntityType="Self.Admission_mst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
@@ -391,11 +493,54 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
           <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FinancialYear" EntityType="Self.FinancialYear" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Domicile" EntityType="Self.Domicile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Institution" EntityType="Self.Institution" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Program" EntityType="Self.Program" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Religion" EntityType="Self.Religion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sessions" EntityType="Self.Sessions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Terms" EntityType="Self.Terms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AcadStatus" EntityType="Self.AcadStatus" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AcadStatus].[Status_ID] AS [Status_ID], 
+    [AcadStatus].[Status] AS [Status]
+    FROM [dbo].[AcadStatus] AS [AcadStatus]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Admission_vw" EntityType="Self.Admission_vw" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Admission_vw].[Adms_ID] AS [Adms_ID], 
+    [Admission_vw].[Institute] AS [Institute], 
+    [Admission_vw].[Campus] AS [Campus], 
+    [Admission_vw].[FORM_NO] AS [FORM_NO], 
+    [Admission_vw].[SUBMITTED_DT] AS [SUBMITTED_DT], 
+    [Admission_vw].[FullName] AS [FullName], 
+    [Admission_vw].[DATE_OF_BIRTH] AS [DATE_OF_BIRTH], 
+    [Admission_vw].[RELIGION] AS [RELIGION], 
+    [Admission_vw].[DOMICILE] AS [DOMICILE], 
+    [Admission_vw].[GENDER] AS [GENDER], 
+    [Admission_vw].[IDENTIFICATION_MARK] AS [IDENTIFICATION_MARK], 
+    [Admission_vw].[USER_IMG] AS [USER_IMG], 
+    [Admission_vw].[ADDRESS1] AS [ADDRESS1], 
+    [Admission_vw].[ACAD_STATUS] AS [ACAD_STATUS], 
+    [Admission_vw].[Cityid] AS [Cityid], 
+    [Admission_vw].[Stateid] AS [Stateid], 
+    [Admission_vw].[Countid] AS [Countid], 
+    [Admission_vw].[FTHR_FNAME] AS [FTHR_FNAME], 
+    [Admission_vw].[FTHR_MNAME] AS [FTHR_MNAME], 
+    [Admission_vw].[FTHR_LNAME] AS [FTHR_LNAME], 
+    [Admission_vw].[STD_CNIC] AS [STD_CNIC], 
+    [Admission_vw].[FTHR_CNIC] AS [FTHR_CNIC], 
+    [Admission_vw].[OCCUPATION] AS [OCCUPATION], 
+    [Admission_vw].[session] AS [session], 
+    [Admission_vw].[Class] AS [Class], 
+    [Admission_vw].[PHONE] AS [PHONE], 
+    [Admission_vw].[REMARKS] AS [REMARKS], 
+    [Admission_vw].[ADDEDBY] AS [ADDEDBY], 
+    [Admission_vw].[ADDEDDATE] AS [ADDEDDATE], 
+    [Admission_vw].[UPDATEDBY] AS [UPDATEDBY], 
+    [Admission_vw].[UPDATEDATE] AS [UPDATEDATE]
+    FROM [dbo].[Admission_vw] AS [Admission_vw]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="Campus_vw" EntityType="Self.Campus_vw" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Campus_vw].[Campid] AS [Campid], 
@@ -427,23 +572,6 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
     [Class_vw].[ActvStatus] AS [ActvStatus]
     FROM [dbo].[Class_vw] AS [Class_vw]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Financial_vw" EntityType="Self.Financial_vw" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Financial_vw].[FINCID] AS [FINCID], 
-    [Financial_vw].[Instdesc] AS [Instdesc], 
-    [Financial_vw].[Campdesc] AS [Campdesc], 
-    [Financial_vw].[STARTDATE] AS [STARTDATE], 
-    [Financial_vw].[ENDDATE] AS [ENDDATE], 
-    [Financial_vw].[STARTMON] AS [STARTMON], 
-    [Financial_vw].[ENDMON] AS [ENDMON], 
-    [Financial_vw].[DESCRIPTION] AS [DESCRIPTION], 
-    [Financial_vw].[ISACTIVE] AS [ISACTIVE], 
-    [Financial_vw].[ADDEDBY] AS [ADDEDBY], 
-    [Financial_vw].[ADDEDDATE] AS [ADDEDDATE], 
-    [Financial_vw].[UPDATEDBY] AS [UPDATEDBY], 
-    [Financial_vw].[UPDATEDDT] AS [UPDATEDDT]
-    FROM [dbo].[Financial_vw] AS [Financial_vw]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="Institution_vw" EntityType="Self.Institution_vw" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Institution_vw].[Instid] AS [Instid], 
@@ -471,6 +599,21 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
     [Program_vw].[Updatedt] AS [Updatedt], 
     [Program_vw].[ActvStatus] AS [ActvStatus]
     FROM [dbo].[Program_vw] AS [Program_vw]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Session_vw" EntityType="Self.Session_vw" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Session_vw].[SessionID] AS [SessionID], 
+    [Session_vw].[Instdesc] AS [Instdesc], 
+    [Session_vw].[Campdesc] AS [Campdesc], 
+    [Session_vw].[STARTDATE] AS [STARTDATE], 
+    [Session_vw].[ENDDATE] AS [ENDDATE], 
+    [Session_vw].[DESCRIPTION] AS [DESCRIPTION], 
+    [Session_vw].[ISACTIVE] AS [ISACTIVE], 
+    [Session_vw].[ADDEDBY] AS [ADDEDBY], 
+    [Session_vw].[ADDEDDATE] AS [ADDEDDATE], 
+    [Session_vw].[UPDATEDBY] AS [UPDATEDBY], 
+    [Session_vw].[UPDATEDDT] AS [UPDATEDDT]
+    FROM [dbo].[Session_vw] AS [Session_vw]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Term_vw" EntityType="Self.Term_vw" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -589,7 +732,7 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
           <Property Name="AddedDate" Type="DateTime" Precision="3" />
           <Property Name="Updatedby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Updatedt" Type="DateTime" Precision="3" />
-        </EntityType>
+          </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -658,12 +801,17 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
           <EntitySet Name="Campus_vw" EntityType="TTS_SMSModel.Campus_vw" />
           <EntitySet Name="Program_vw" EntityType="TTS_SMSModel.Program_vw" />
           <EntitySet Name="Classes" EntityType="TTS_SMSModel.Class" />
-          <EntitySet Name="FinancialYears" EntityType="TTS_SMSModel.FinancialYear" />
           <EntitySet Name="Terms" EntityType="TTS_SMSModel.Term" />
           <EntitySet Name="Class_vw" EntityType="TTS_SMSModel.Class_vw" />
-          <EntitySet Name="Financial_vw" EntityType="TTS_SMSModel.Financial_vw" />
           <EntitySet Name="Term_vw" EntityType="TTS_SMSModel.Term_vw" />
-        </EntityContainer>
+          <EntitySet Name="Domiciles" EntityType="TTS_SMSModel.Domicile" />
+          <EntitySet Name="Religions" EntityType="TTS_SMSModel.Religion" />
+          <EntitySet Name="Admission_mst" EntityType="TTS_SMSModel.Admission_mst" />
+          <EntitySet Name="Sessions" EntityType="TTS_SMSModel.Session" />
+          <EntitySet Name="Session_vw" EntityType="TTS_SMSModel.Session_vw" />
+          <EntitySet Name="AcadStatus" EntityType="TTS_SMSModel.AcadStatu" />
+          <EntitySet Name="Admission_vw" EntityType="TTS_SMSModel.Admission_vw" />
+          </EntityContainer>
         <EntityType Name="Campu">
           <Key>
             <PropertyRef Name="Campid" />
@@ -680,7 +828,7 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
           <Property Name="Updatedby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Updatedt" Type="DateTime" Precision="3" />
           <Property Name="ActvStatus" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="City">
           <Key>
             <PropertyRef Name="Id" />
@@ -797,7 +945,7 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
           <Property Name="AddedDate" Type="DateTime" Precision="3" />
           <Property Name="Updatedby" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Updatedt" Type="DateTime" Precision="3" />
-          <Property Name="ActvStatus" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="ActvStatus" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="Class">
           <Key>
@@ -814,24 +962,6 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
           <Property Name="Updatedby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Updatedt" Type="DateTime" Precision="3" />
           <Property Name="ActvStatus" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="FinancialYear">
-          <Key>
-            <PropertyRef Name="FINCID" />
-          </Key>
-          <Property Name="FINCID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="INSTID" Type="Int32" Nullable="false" />
-          <Property Name="CAMPID" Type="Int32" Nullable="false" />
-          <Property Name="STARTDATE" Type="DateTime" Precision="0" />
-          <Property Name="ENDDATE" Type="DateTime" Precision="0" />
-          <Property Name="STARTMON" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="ENDMON" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="DESCRIPTION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ISACTIVE" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-          <Property Name="ADDEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ADDEDDATE" Type="DateTime" Precision="3" />
-          <Property Name="UPDATEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UPDATEDDT" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Term">
           <Key>
@@ -863,25 +993,7 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
           <Property Name="AddedDate" Type="DateTime" Precision="3" />
           <Property Name="Updatedby" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Updatedt" Type="DateTime" Precision="3" />
-          <Property Name="ActvStatus" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Financial_vw">
-          <Key>
-            <PropertyRef Name="FINCID" />
-          </Key>
-          <Property Name="FINCID" Type="Int32" Nullable="false" />
-          <Property Name="Instdesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Campdesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="STARTDATE" Type="DateTime" Precision="0" />
-          <Property Name="ENDDATE" Type="DateTime" Precision="0" />
-          <Property Name="STARTMON" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="ENDMON" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="DESCRIPTION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ISACTIVE" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-          <Property Name="ADDEDBY" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="ADDEDDATE" Type="DateTime" Precision="3" />
-          <Property Name="UPDATEDBY" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="UPDATEDDT" Type="DateTime" Precision="3" />
+          <Property Name="ActvStatus" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="Term_vw">
           <Key>
@@ -899,7 +1011,138 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="ActvStatus" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
-      </Schema>
+        <EntityType Name="Domicile">
+          <Key>
+            <PropertyRef Name="DOMID" />
+          </Key>
+          <Property Name="DOMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DESCR" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Religion">
+          <Key>
+            <PropertyRef Name="RELIGIONID" />
+          </Key>
+          <Property Name="RELIGIONID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Admission_mst">
+          <Key>
+            <PropertyRef Name="Adms_ID" />
+          </Key>
+          <Property Name="Adms_ID" Type="Int32" Nullable="false" />
+          <Property Name="INSTID" Type="Int32" />
+          <Property Name="CAMPID" Type="Int32" />
+          <Property Name="FORM_NO" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="SUBMITTED_DT" Type="DateTime" Precision="3" />
+          <Property Name="FIRST_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="MIDDLE_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="LAST_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="DATE_OF_BIRTH" Type="DateTime" Precision="3" />
+          <Property Name="RELIGION" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="DOMICILE" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="GENDER" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IDENTIFICATION_MARK" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="USER_IMG" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ADDRESS1" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
+          <Property Name="ACAD_STATUS" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Cityid" Type="Int32" />
+          <Property Name="Stateid" Type="Int32" />
+          <Property Name="Countid" Type="Int32" />
+          <Property Name="FTHR_FNAME" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="FTHR_MNAME" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="FTHR_LNAME" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="STD_CNIC" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="FTHR_CNIC" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="OCCUPATION" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="SESSION_YEAR" Type="Int32" />
+          <Property Name="APPLIED_FOR_CLASS" Type="Int32" />
+          <Property Name="PHONE" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="REMARKS" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ADDEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ADDEDDATE" Type="DateTime" Precision="3" />
+          <Property Name="UPDATEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATEDATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="SESSIONID" />
+          </Key>
+          <Property Name="SESSIONID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INSTID" Type="Int32" Nullable="false" />
+          <Property Name="CAMPID" Type="Int32" Nullable="false" />
+          <Property Name="STARTDATE" Type="DateTime" Precision="0" />
+          <Property Name="ENDDATE" Type="DateTime" Precision="0" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ISACTIVE" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="ADDEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ADDEDDATE" Type="DateTime" Precision="3" />
+          <Property Name="UPDATEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATEDDT" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Session_vw">
+          <Key>
+            <PropertyRef Name="SessionID" />
+          </Key>
+          <Property Name="SessionID" Type="Int32" Nullable="false" />
+          <Property Name="Instdesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Campdesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="STARTDATE" Type="DateTime" Precision="0" />
+          <Property Name="ENDDATE" Type="DateTime" Precision="0" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ISACTIVE" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="ADDEDBY" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ADDEDDATE" Type="DateTime" Precision="3" />
+          <Property Name="UPDATEDBY" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="UPDATEDDT" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="AcadStatu">
+          <Key>
+            <PropertyRef Name="Status_ID" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="Status_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Admission_vw">
+          <Key>
+            <PropertyRef Name="Adms_ID" />
+            <PropertyRef Name="FullName" />
+            <PropertyRef Name="GENDER" />
+          </Key>
+          <Property Name="Adms_ID" Type="Int32" Nullable="false" />
+          <Property Name="Institute" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Campus" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FORM_NO" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="SUBMITTED_DT" Type="DateTime" Precision="3" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="92" FixedLength="false" Unicode="true" />
+          <Property Name="DATE_OF_BIRTH" Type="DateTime" Precision="3" />
+          <Property Name="RELIGION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOMICILE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GENDER" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="IDENTIFICATION_MARK" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="USER_IMG" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ADDRESS1" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
+          <Property Name="ACAD_STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cityid" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Stateid" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Countid" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="FTHR_FNAME" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="FTHR_MNAME" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="FTHR_LNAME" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="STD_CNIC" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="FTHR_CNIC" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="OCCUPATION" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="session" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Class" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PHONE" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="REMARKS" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ADDEDBY" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ADDEDDATE" Type="DateTime" Precision="3" />
+          <Property Name="UPDATEDBY" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="UPDATEDATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1112,25 +1355,6 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FinancialYears">
-            <EntityTypeMapping TypeName="TTS_SMSModel.FinancialYear">
-              <MappingFragment StoreEntitySet="FinancialYear">
-                <ScalarProperty Name="UPDATEDDT" ColumnName="UPDATEDDT" />
-                <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
-                <ScalarProperty Name="ADDEDDATE" ColumnName="ADDEDDATE" />
-                <ScalarProperty Name="ADDEDBY" ColumnName="ADDEDBY" />
-                <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
-                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
-                <ScalarProperty Name="ENDMON" ColumnName="ENDMON" />
-                <ScalarProperty Name="STARTMON" ColumnName="STARTMON" />
-                <ScalarProperty Name="ENDDATE" ColumnName="ENDDATE" />
-                <ScalarProperty Name="STARTDATE" ColumnName="STARTDATE" />
-                <ScalarProperty Name="CAMPID" ColumnName="CAMPID" />
-                <ScalarProperty Name="INSTID" ColumnName="INSTID" />
-                <ScalarProperty Name="FINCID" ColumnName="FINCID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Terms">
             <EntityTypeMapping TypeName="TTS_SMSModel.Term">
               <MappingFragment StoreEntitySet="Terms">
@@ -1165,25 +1389,6 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Financial_vw">
-            <EntityTypeMapping TypeName="TTS_SMSModel.Financial_vw">
-              <MappingFragment StoreEntitySet="Financial_vw">
-                <ScalarProperty Name="UPDATEDDT" ColumnName="UPDATEDDT" />
-                <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
-                <ScalarProperty Name="ADDEDDATE" ColumnName="ADDEDDATE" />
-                <ScalarProperty Name="ADDEDBY" ColumnName="ADDEDBY" />
-                <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
-                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
-                <ScalarProperty Name="ENDMON" ColumnName="ENDMON" />
-                <ScalarProperty Name="STARTMON" ColumnName="STARTMON" />
-                <ScalarProperty Name="ENDDATE" ColumnName="ENDDATE" />
-                <ScalarProperty Name="STARTDATE" ColumnName="STARTDATE" />
-                <ScalarProperty Name="Campdesc" ColumnName="Campdesc" />
-                <ScalarProperty Name="Instdesc" ColumnName="Instdesc" />
-                <ScalarProperty Name="FINCID" ColumnName="FINCID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Term_vw">
             <EntityTypeMapping TypeName="TTS_SMSModel.Term_vw">
               <MappingFragment StoreEntitySet="Term_vw">
@@ -1198,6 +1403,141 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
                 <ScalarProperty Name="TermDescription" ColumnName="TermDescription" />
                 <ScalarProperty Name="TermName" ColumnName="TermName" />
                 <ScalarProperty Name="TermId" ColumnName="TermId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Domiciles">
+            <EntityTypeMapping TypeName="TTS_SMSModel.Domicile">
+              <MappingFragment StoreEntitySet="Domicile">
+                <ScalarProperty Name="DESCR" ColumnName="DESCR" />
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
+                <ScalarProperty Name="DOMID" ColumnName="DOMID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Religions">
+            <EntityTypeMapping TypeName="TTS_SMSModel.Religion">
+              <MappingFragment StoreEntitySet="Religion">
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="RELIGIONID" ColumnName="RELIGIONID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admission_mst">
+            <EntityTypeMapping TypeName="TTS_SMSModel.Admission_mst">
+              <MappingFragment StoreEntitySet="Admission_mst">
+                <ScalarProperty Name="UPDATEDATE" ColumnName="UPDATEDATE" />
+                <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
+                <ScalarProperty Name="ADDEDDATE" ColumnName="ADDEDDATE" />
+                <ScalarProperty Name="ADDEDBY" ColumnName="ADDEDBY" />
+                <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+                <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+                <ScalarProperty Name="APPLIED_FOR_CLASS" ColumnName="APPLIED_FOR_CLASS" />
+                <ScalarProperty Name="SESSION_YEAR" ColumnName="SESSION_YEAR" />
+                <ScalarProperty Name="OCCUPATION" ColumnName="OCCUPATION" />
+                <ScalarProperty Name="FTHR_CNIC" ColumnName="FTHR_CNIC" />
+                <ScalarProperty Name="STD_CNIC" ColumnName="STD_CNIC" />
+                <ScalarProperty Name="FTHR_LNAME" ColumnName="FTHR_LNAME" />
+                <ScalarProperty Name="FTHR_MNAME" ColumnName="FTHR_MNAME" />
+                <ScalarProperty Name="FTHR_FNAME" ColumnName="FTHR_FNAME" />
+                <ScalarProperty Name="Countid" ColumnName="Countid" />
+                <ScalarProperty Name="Stateid" ColumnName="Stateid" />
+                <ScalarProperty Name="Cityid" ColumnName="Cityid" />
+                <ScalarProperty Name="ACAD_STATUS" ColumnName="ACAD_STATUS" />
+                <ScalarProperty Name="ADDRESS1" ColumnName="ADDRESS1" />
+                <ScalarProperty Name="USER_IMG" ColumnName="USER_IMG" />
+                <ScalarProperty Name="IDENTIFICATION_MARK" ColumnName="IDENTIFICATION_MARK" />
+                <ScalarProperty Name="GENDER" ColumnName="GENDER" />
+                <ScalarProperty Name="DOMICILE" ColumnName="DOMICILE" />
+                <ScalarProperty Name="RELIGION" ColumnName="RELIGION" />
+                <ScalarProperty Name="DATE_OF_BIRTH" ColumnName="DATE_OF_BIRTH" />
+                <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
+                <ScalarProperty Name="MIDDLE_NAME" ColumnName="MIDDLE_NAME" />
+                <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
+                <ScalarProperty Name="SUBMITTED_DT" ColumnName="SUBMITTED_DT" />
+                <ScalarProperty Name="FORM_NO" ColumnName="FORM_NO" />
+                <ScalarProperty Name="CAMPID" ColumnName="CAMPID" />
+                <ScalarProperty Name="INSTID" ColumnName="INSTID" />
+                <ScalarProperty Name="Adms_ID" ColumnName="Adms_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sessions">
+            <EntityTypeMapping TypeName="TTS_SMSModel.Session">
+              <MappingFragment StoreEntitySet="Sessions">
+                <ScalarProperty Name="UPDATEDDT" ColumnName="UPDATEDDT" />
+                <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
+                <ScalarProperty Name="ADDEDDATE" ColumnName="ADDEDDATE" />
+                <ScalarProperty Name="ADDEDBY" ColumnName="ADDEDBY" />
+                <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="ENDDATE" ColumnName="ENDDATE" />
+                <ScalarProperty Name="STARTDATE" ColumnName="STARTDATE" />
+                <ScalarProperty Name="CAMPID" ColumnName="CAMPID" />
+                <ScalarProperty Name="INSTID" ColumnName="INSTID" />
+                <ScalarProperty Name="SESSIONID" ColumnName="SESSIONID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Session_vw">
+            <EntityTypeMapping TypeName="TTS_SMSModel.Session_vw">
+              <MappingFragment StoreEntitySet="Session_vw">
+                <ScalarProperty Name="UPDATEDDT" ColumnName="UPDATEDDT" />
+                <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
+                <ScalarProperty Name="ADDEDDATE" ColumnName="ADDEDDATE" />
+                <ScalarProperty Name="ADDEDBY" ColumnName="ADDEDBY" />
+                <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="ENDDATE" ColumnName="ENDDATE" />
+                <ScalarProperty Name="STARTDATE" ColumnName="STARTDATE" />
+                <ScalarProperty Name="Campdesc" ColumnName="Campdesc" />
+                <ScalarProperty Name="Instdesc" ColumnName="Instdesc" />
+                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AcadStatus">
+            <EntityTypeMapping TypeName="TTS_SMSModel.AcadStatu">
+              <MappingFragment StoreEntitySet="AcadStatus">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Status_ID" ColumnName="Status_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admission_vw">
+            <EntityTypeMapping TypeName="TTS_SMSModel.Admission_vw">
+              <MappingFragment StoreEntitySet="Admission_vw">
+                <ScalarProperty Name="UPDATEDATE" ColumnName="UPDATEDATE" />
+                <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
+                <ScalarProperty Name="ADDEDDATE" ColumnName="ADDEDDATE" />
+                <ScalarProperty Name="ADDEDBY" ColumnName="ADDEDBY" />
+                <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+                <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="session" ColumnName="session" />
+                <ScalarProperty Name="OCCUPATION" ColumnName="OCCUPATION" />
+                <ScalarProperty Name="FTHR_CNIC" ColumnName="FTHR_CNIC" />
+                <ScalarProperty Name="STD_CNIC" ColumnName="STD_CNIC" />
+                <ScalarProperty Name="FTHR_LNAME" ColumnName="FTHR_LNAME" />
+                <ScalarProperty Name="FTHR_MNAME" ColumnName="FTHR_MNAME" />
+                <ScalarProperty Name="FTHR_FNAME" ColumnName="FTHR_FNAME" />
+                <ScalarProperty Name="Countid" ColumnName="Countid" />
+                <ScalarProperty Name="Stateid" ColumnName="Stateid" />
+                <ScalarProperty Name="Cityid" ColumnName="Cityid" />
+                <ScalarProperty Name="ACAD_STATUS" ColumnName="ACAD_STATUS" />
+                <ScalarProperty Name="ADDRESS1" ColumnName="ADDRESS1" />
+                <ScalarProperty Name="USER_IMG" ColumnName="USER_IMG" />
+                <ScalarProperty Name="IDENTIFICATION_MARK" ColumnName="IDENTIFICATION_MARK" />
+                <ScalarProperty Name="GENDER" ColumnName="GENDER" />
+                <ScalarProperty Name="DOMICILE" ColumnName="DOMICILE" />
+                <ScalarProperty Name="RELIGION" ColumnName="RELIGION" />
+                <ScalarProperty Name="DATE_OF_BIRTH" ColumnName="DATE_OF_BIRTH" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="SUBMITTED_DT" ColumnName="SUBMITTED_DT" />
+                <ScalarProperty Name="FORM_NO" ColumnName="FORM_NO" />
+                <ScalarProperty Name="Campus" ColumnName="Campus" />
+                <ScalarProperty Name="Institute" ColumnName="Institute" />
+                <ScalarProperty Name="Adms_ID" ColumnName="Adms_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,0 +1,147 @@
+﻿@model Class
+@{
+    ViewBag.Title = "AddClasses";
+}
+
+
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="card mt-3 mb-3">
+            <div class="card-header">
+                <h3 class="text-center">Create Class</h3>
+                <hr />
+            </div>
+            <div class="card-body row">
+                <div class="form-group col-md-6 mb-3">
+                    @Html.LabelFor(model => model.INSTID, "INSTID", htmlAttributes: new { @class = "control-label col-m-6" })
+                    <div class="col-md-12">
+                        @Html.DropDownList("INSTID", null, "----Select----", htmlAttributes: new { @class = "form-control", @id = "institute" })
+                        @Html.ValidationMessageFor(model => model.INSTID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    @Html.LabelFor(model => model.CAMPID, "CAMPID", htmlAttributes: new { @class = "control-label col-m-6" })
+                    <div class="col-md-12">
+                        @Html.DropDownList("CAMPID", null, "----Select----", htmlAttributes: new { @class = "form-control", @id = "campus" })
+                        @Html.ValidationMessageFor(model => model.CAMPID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group col-md-6 mb-3">
+                    @Html.LabelFor(model => model.Progid, "Progid", htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-12">
+                        @Html.DropDownListFor(model => model.Progid, new SelectList(""), "----Select----", htmlAttributes: new { @class = "form-control", @id = "program" })
+                        @Html.ValidationMessageFor(model => model.Progid, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+                <div class="form-group col-md-6 mb-3">
+                    @Html.LabelFor(model => model.Classname, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Classname, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Classname, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    @Html.LabelFor(model => model.Classdescription, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Classdescription, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Classdescription, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group col-md-6 mt-4">
+                    <div class=" col-md-12 d-flex justify-content-end">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "ClassesList")
+</div>
+
+<script>
+    $(document).ready(function () {
+
+
+        $("#institute").change(function () {
+            var InstID = $('#institute').val();
+            debugger;
+            $.ajax({
+                type: 'POST',
+                url: '/DropDowns/GetCampus?id=' + InstID,  // Replace with your actual API endpoint URL
+                contentType: 'application/json',
+                success: function (response) {
+                    debugger;
+                    if (response != "") {
+                        // Handle a successful response from the server
+                        $("#campus").empty();
+
+                        $("#campus").append(response);
+                    }
+
+                },
+                error: function (error) {
+                    // Handle errors
+                    console.error(error);
+                }
+            });
+        });
+
+
+
+
+        $("#campus").change(function () {
+            var InstID = $('#institute').val();
+            var campus = $('#campus').val();
+            debugger;
+            $.ajax({
+                type: 'POST',
+                url: '/DropDowns/Getprog?campus=' + campus + "&institiute=" + InstID,  // Replace with your actual API endpoint URL
+                contentType: 'application/json',
+                success: function (response) {
+                    debugger;
+                    if (response != "") {
+                        // Handle a successful response from the server
+                        $("#program").empty();
+
+                        $("#program").append(response);
+                    }
+
+                },
+                error: function (error) {
+                    // Handle errors
+                    console.error(error);
+                }
+            });
+        });
+
+
+
+
+
+
+
+    });
+</script>
