@@ -14,6 +14,13 @@ namespace SchoolManagementSystemTTS.Models
     
     public partial class Institution
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Institution()
+        {
+            this.Departments = new HashSet<Department>();
+            this.Departments1 = new HashSet<Department>();
+        }
+    
         public int Instid { get; set; }
         public string Instdesc { get; set; }
         public string Instshortdesc { get; set; }
@@ -24,5 +31,10 @@ namespace SchoolManagementSystemTTS.Models
         public Nullable<System.DateTime> AddedDate { get; set; }
         public string Updatedby { get; set; }
         public Nullable<System.DateTime> Updatedt { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Department> Departments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Department> Departments1 { get; set; }
     }
 }

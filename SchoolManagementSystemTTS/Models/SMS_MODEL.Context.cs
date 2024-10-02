@@ -50,5 +50,9 @@ namespace SchoolManagementSystemTTS.Models
         public virtual DbSet<Session_vw> Session_vw { get; set; }
         public virtual DbSet<AcadStatu> AcadStatus { get; set; }
         public virtual DbSet<Admission_vw> Admission_vw { get; set; }
+        public virtual DbSet<Account_Head> Account_Head { get; set; }
+        public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<Frequency> Frequencies { get; set; }
+        public virtual DbSet<Fees_Structure> Fees_Structure { get; set; }
     }
 }

@@ -1,0 +1,108 @@
+﻿@model Account_Head
+@{
+    TTS_SMSEntities db = new TTS_SMSEntities();
+    ViewBag.Title = "AddAccountHead";
+    var institute = new SelectList(db.Institutions, "Instid", "Instdesc");
+    var campus = new SelectList(db.Campus.Where(x => x.Instid == Model.Instid), "Campid", "Campdesc", Model.Campid);
+
+    //ViewBag.CAMPID = new SelectList(db.Campus, "Campid", "Campdesc");
+
+}
+@using (Html.BeginForm("AddAccountHead", "AccountHead", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="card mt-3">
+            <div class="card-header">
+                <h3 class="text-center">Account Head</h3>
+                <hr />
+            </div>
+            <div class="card-body row">
+
+                <div class="form-group col-md-6 mb-3">
+                    @Html.LabelFor(model => model.Instid, "Instid", htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-12">
+                        @Html.DropDownListFor(model => model.Instid, (IEnumerable<SelectListItem>)institute, "Please Select", new { @class = "form-control", @id = "institute" })
+                        @Html.ValidationMessageFor(model => model.Instid, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    @Html.LabelFor(model => model.Campid, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-12">
+                        @Html.DropDownListFor(model => model.Campid, (IEnumerable<SelectListItem>)campus, "Please Select", new { @class = "form-control", @id = "campus" })
+                        @Html.ValidationMessageFor(model => model.Campid, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    @Html.LabelFor(model => model.Head_Name, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Head_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Head_Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>  
+                
+                <div class="form-group col-md-6 mb-3">
+                    @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-12">
+                        @Html.DropDownListFor(model => model.Status, new SelectList(new List<SelectListItem>
+   {
+       new SelectListItem { Text = "Inactive", Value = "0" },
+       new SelectListItem { Text = "Active", Value = "1" }
+   }, "Value", "Text"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group col-md-6 mt-4">
+                    <div class=" col-md-12 d-flex justify-content-end">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "AccountHeadlist")
+</div>
+
+@*<script>
+        $("#institute").change(function () {
+            var InstID = $('#institute').val();
+            debugger;
+            $.ajax({
+                type: 'POST',
+                url: '/DropDowns/GetCampus?id=' + InstID,  // Replace with your actual API endpoint URL
+                contentType: 'application/json',
+                success: function (response) {
+                    debugger;
+                    if (response != "") {
+                        // Handle a successful response from the server
+                        $("#campus").empty();
+                        $("#Class").empty();
+                        $("#sessionYear").empty();
+                        $("#campus").append(response);
+                    }
+
+                },
+                error: function (error) {
+                    // Handle errors
+                    console.error(error);
+                }
+            });
+        });
+    </script>*@

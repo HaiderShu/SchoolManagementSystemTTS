@@ -1,0 +1,76 @@
+﻿<script>
+    $("#institute").change(function () {
+        var InstID = $('#institute').val();
+        debugger;
+        $.ajax({
+            type: 'POST',
+            url: '/DropDowns/GetCampus?id=' + InstID,  // Replace with your actual API endpoint URL
+            contentType: 'application/json',
+            success: function (response) {
+                debugger;
+                if (response != "") {
+                    // Handle a successful response from the server
+                    $("#campus").empty();
+                    $("#Class").empty();
+                    $("#sessionYear").empty();
+                    $("#campus").append(response);
+                }
+
+            },
+            error: function (error) {
+                // Handle errors
+                console.error(error);
+            }
+        });
+    });
+
+
+    $("#campus").change(function () {
+        var campus = $('#campus').val();
+        var InstID = $('#institute').val();
+        debugger;
+        $.ajax({
+            type: 'POST',
+            url: '/DropDowns/GetClasses?campus=' + campus + "&institiute=" + InstID, // Replace with your actual API endpoint URL
+            contentType: 'application/json',
+            success: function (response) {
+                debugger;
+                if (response != "") {
+                    // Handle a successful response from the server
+                    $("#Class").empty();
+                    $("#Class").append(response);
+                }
+
+            },
+            error: function (error) {
+                // Handle errors
+                console.error(error);
+            }
+        });
+
+
+        $.ajax({
+            type: 'POST',
+            url: '/DropDowns/GetFy?campus=' + campus + "&institiute=" + InstID, // Replace with your actual API endpoint URL
+            contentType: 'application/json',
+            success: function (response) {
+                debugger;
+                if (response != "") {
+                    // Handle a successful response from the server
+                    $("#sessionYear").empty();
+                    $("#sessionYear").append(response);
+                }
+
+            },
+            error: function (error) {
+                // Handle errors
+                console.error(error);
+            }
+        });
+
+
+
+
+
+    });
+</script>

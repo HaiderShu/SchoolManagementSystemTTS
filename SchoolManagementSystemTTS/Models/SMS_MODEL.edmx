@@ -25,6 +25,21 @@ warning 6002: The table/view 'TTS_SMS.dbo.AcadStatus' does not have a primary ke
           <Property Name="Status_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Account_Head">
+          <Key>
+            <PropertyRef Name="Head_ID" />
+          </Key>
+          <Property Name="Head_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Head_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="Instid" Type="int" />
+          <Property Name="Campid" Type="int" />
+          <Property Name="Status" Type="int" />
+          <Property Name="ADDEDBY" Type="varchar" MaxLength="50" />
+          <Property Name="ADDEDDATE" Type="datetime" />
+          <Property Name="UPDATEDBY" Type="varchar" MaxLength="50" />
+          <Property Name="UPDATEDATE" Type="datetime" />
+        </EntityType>
         <EntityType Name="Admission_mst">
           <Key>
             <PropertyRef Name="Adms_ID" />
@@ -163,6 +178,20 @@ warning 6002: The table/view 'TTS_SMS.dbo.AcadStatus' does not have a primary ke
           <Property Name="Sortname" Type="nvarchar" MaxLength="3" />
           <Property Name="Name" Type="nvarchar" MaxLength="150" />
         </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="DEPTID" />
+          </Key>
+          <Property Name="DEPTID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INSTID" Type="int" />
+          <Property Name="CAMPID" Type="int" />
+          <Property Name="DEPTNAME" Type="varchar" MaxLength="100" />
+          <Property Name="DEPTDESCRIPTION" Type="text" />
+          <Property Name="ADDEDBY" Type="varchar" MaxLength="50" />
+          <Property Name="ADDEDDATE" Type="datetime" />
+          <Property Name="UPDATEDBY" Type="varchar" MaxLength="50" />
+          <Property Name="UPDATEDATE" Type="datetime" />
+        </EntityType>
         <EntityType Name="Domicile">
           <Key>
             <PropertyRef Name="DOMID" />
@@ -170,6 +199,29 @@ warning 6002: The table/view 'TTS_SMS.dbo.AcadStatus' does not have a primary ke
           <Property Name="DOMID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CODE" Type="nvarchar" MaxLength="50" />
           <Property Name="DESCR" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fees_Structure">
+          <Key>
+            <PropertyRef Name="Fee_ID" />
+          </Key>
+          <Property Name="Fee_ID" Type="int" Nullable="false" />
+          <Property Name="Instid" Type="int" />
+          <Property Name="Campid" Type="int" />
+          <Property Name="Classid" Type="int" />
+          <Property Name="Head_ID" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Frequency" Type="int" />
+          <Property Name="ADDEDBY" Type="varchar" MaxLength="50" />
+          <Property Name="ADDEDDATE" Type="datetime" />
+          <Property Name="UPDATEDBY" Type="varchar" MaxLength="50" />
+          <Property Name="UPDATEDATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Frequency">
+          <Key>
+            <PropertyRef Name="freq_id" />
+          </Key>
+          <Property Name="freq_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descr" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Institution">
           <Key>
@@ -255,6 +307,7 @@ warning 6002: The table/view 'TTS_SMS.dbo.Admission_vw' does not have a primary 
             <PropertyRef Name="Adms_ID" />
             <PropertyRef Name="FullName" />
             <PropertyRef Name="GENDER" />
+            
           </Key>
           <Property Name="Adms_ID" Type="int" Nullable="false" />
           <Property Name="Institute" Type="varchar" MaxLength="255" />
@@ -273,7 +326,7 @@ warning 6002: The table/view 'TTS_SMS.dbo.Admission_vw' does not have a primary 
           <Property Name="Cityid" Type="nvarchar" MaxLength="30" />
           <Property Name="Stateid" Type="nvarchar" MaxLength="30" />
           <Property Name="Countid" Type="nvarchar" MaxLength="150" />
-          <Property Name="FTHR_FNAME" Type="nvarchar" MaxLength="30" />
+          <Property Name="FTHR_FNAME" Type="nvarchar" MaxLength="92" Nullable="false" />
           <Property Name="FTHR_MNAME" Type="nvarchar" MaxLength="30" />
           <Property Name="FTHR_LNAME" Type="nvarchar" MaxLength="30" />
           <Property Name="STD_CNIC" Type="nvarchar" MaxLength="30" />
@@ -397,6 +450,54 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="ActvStatus" Type="varchar" MaxLength="5" />
         </EntityType>
+        <Association Name="FK__Departmen__CAMPI__4F7CD00D">
+          <End Role="Campus" Type="Self.Campus" Multiplicity="0..1" />
+          <End Role="Departments" Type="Self.Departments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campus">
+              <PropertyRef Name="Campid" />
+            </Principal>
+            <Dependent Role="Departments">
+              <PropertyRef Name="CAMPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departmen__CAMPI__5070F446">
+          <End Role="Campus" Type="Self.Campus" Multiplicity="0..1" />
+          <End Role="Departments" Type="Self.Departments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campus">
+              <PropertyRef Name="Campid" />
+            </Principal>
+            <Dependent Role="Departments">
+              <PropertyRef Name="CAMPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departmen__INSTI__5165187F">
+          <End Role="Institution" Type="Self.Institution" Multiplicity="0..1" />
+          <End Role="Departments" Type="Self.Departments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Institution">
+              <PropertyRef Name="Instid" />
+            </Principal>
+            <Dependent Role="Departments">
+              <PropertyRef Name="INSTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departmen__INSTI__52593CB8">
+          <End Role="Institution" Type="Self.Institution" Multiplicity="0..1" />
+          <End Role="Departments" Type="Self.Departments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Institution">
+              <PropertyRef Name="Instid" />
+            </Principal>
+            <Dependent Role="Departments">
+              <PropertyRef Name="INSTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -483,6 +584,7 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
         </Association>
         <EntityContainer Name="TTS_SMSModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Account_Head" EntityType="Self.Account_Head" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Admission_mst" EntityType="Self.Admission_mst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -493,7 +595,10 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
           <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Domicile" EntityType="Self.Domicile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fees_Structure" EntityType="Self.Fees_Structure" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Frequency" EntityType="Self.Frequency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Institution" EntityType="Self.Institution" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Program" EntityType="Self.Program" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Religion" EntityType="Self.Religion" Schema="dbo" store:Type="Tables" />
@@ -630,6 +735,22 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
     [Term_vw].[ActvStatus] AS [ActvStatus]
     FROM [dbo].[Term_vw] AS [Term_vw]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK__Departmen__CAMPI__4F7CD00D" Association="Self.FK__Departmen__CAMPI__4F7CD00D">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Departments" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departmen__CAMPI__5070F446" Association="Self.FK__Departmen__CAMPI__5070F446">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Departments" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departmen__INSTI__5165187F" Association="Self.FK__Departmen__INSTI__5165187F">
+            <End Role="Institution" EntitySet="Institution" />
+            <End Role="Departments" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departmen__INSTI__52593CB8" Association="Self.FK__Departmen__INSTI__52593CB8">
+            <End Role="Institution" EntitySet="Institution" />
+            <End Role="Departments" EntitySet="Departments" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -732,6 +853,8 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
           <Property Name="AddedDate" Type="DateTime" Precision="3" />
           <Property Name="Updatedby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Updatedt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Departments" Relationship="TTS_SMSModel.FK__Departmen__INSTI__5165187F" FromRole="Institution" ToRole="Department" />
+          <NavigationProperty Name="Departments1" Relationship="TTS_SMSModel.FK__Departmen__INSTI__52593CB8" FromRole="Institution" ToRole="Department" />
           </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -811,6 +934,26 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
           <EntitySet Name="Session_vw" EntityType="TTS_SMSModel.Session_vw" />
           <EntitySet Name="AcadStatus" EntityType="TTS_SMSModel.AcadStatu" />
           <EntitySet Name="Admission_vw" EntityType="TTS_SMSModel.Admission_vw" />
+          <EntitySet Name="Account_Head" EntityType="TTS_SMSModel.Account_Head" />
+          <EntitySet Name="Departments" EntityType="TTS_SMSModel.Department" />
+          <AssociationSet Name="FK__Departmen__CAMPI__4F7CD00D" Association="TTS_SMSModel.FK__Departmen__CAMPI__4F7CD00D">
+            <End Role="Campu" EntitySet="Campus" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departmen__CAMPI__5070F446" Association="TTS_SMSModel.FK__Departmen__CAMPI__5070F446">
+            <End Role="Campu" EntitySet="Campus" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departmen__INSTI__5165187F" Association="TTS_SMSModel.FK__Departmen__INSTI__5165187F">
+            <End Role="Institution" EntitySet="Institutions" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departmen__INSTI__52593CB8" Association="TTS_SMSModel.FK__Departmen__INSTI__52593CB8">
+            <End Role="Institution" EntitySet="Institutions" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <EntitySet Name="Frequencies" EntityType="TTS_SMSModel.Frequency" />
+          <EntitySet Name="Fees_Structure" EntityType="TTS_SMSModel.Fees_Structure" />
           </EntityContainer>
         <EntityType Name="Campu">
           <Key>
@@ -828,6 +971,8 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
           <Property Name="Updatedby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Updatedt" Type="DateTime" Precision="3" />
           <Property Name="ActvStatus" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Departments" Relationship="TTS_SMSModel.FK__Departmen__CAMPI__4F7CD00D" FromRole="Campu" ToRole="Department" />
+          <NavigationProperty Name="Departments1" Relationship="TTS_SMSModel.FK__Departmen__CAMPI__5070F446" FromRole="Campu" ToRole="Department" />
           </EntityType>
         <EntityType Name="City">
           <Key>
@@ -1127,7 +1272,7 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
           <Property Name="Cityid" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Stateid" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Countid" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="FTHR_FNAME" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="FTHR_FNAME" Type="String" MaxLength="92" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FTHR_MNAME" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="FTHR_LNAME" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="STD_CNIC" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
@@ -1140,6 +1285,110 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
           <Property Name="ADDEDBY" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="ADDEDDATE" Type="DateTime" Precision="3" />
           <Property Name="UPDATEDBY" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="UPDATEDATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Account_Head">
+          <Key>
+            <PropertyRef Name="Head_ID" />
+          </Key>
+          <Property Name="Head_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Head_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Instid" Type="Int32" />
+          <Property Name="Campid" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="ADDEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ADDEDDATE" Type="DateTime" Precision="3" />
+          <Property Name="UPDATEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATEDATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DEPTID" />
+          </Key>
+          <Property Name="DEPTID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INSTID" Type="Int32" />
+          <Property Name="CAMPID" Type="Int32" />
+          <Property Name="DEPTNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DEPTDESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ADDEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ADDEDDATE" Type="DateTime" Precision="3" />
+          <Property Name="UPDATEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATEDATE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Campu" Relationship="TTS_SMSModel.FK__Departmen__CAMPI__4F7CD00D" FromRole="Department" ToRole="Campu" />
+          <NavigationProperty Name="Campu1" Relationship="TTS_SMSModel.FK__Departmen__CAMPI__5070F446" FromRole="Department" ToRole="Campu" />
+          <NavigationProperty Name="Institution" Relationship="TTS_SMSModel.FK__Departmen__INSTI__5165187F" FromRole="Department" ToRole="Institution" />
+          <NavigationProperty Name="Institution1" Relationship="TTS_SMSModel.FK__Departmen__INSTI__52593CB8" FromRole="Department" ToRole="Institution" />
+        </EntityType>
+        <Association Name="FK__Departmen__CAMPI__4F7CD00D">
+          <End Type="TTS_SMSModel.Campu" Role="Campu" Multiplicity="0..1" />
+          <End Type="TTS_SMSModel.Department" Role="Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campu">
+              <PropertyRef Name="Campid" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="CAMPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departmen__CAMPI__5070F446">
+          <End Type="TTS_SMSModel.Campu" Role="Campu" Multiplicity="0..1" />
+          <End Type="TTS_SMSModel.Department" Role="Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campu">
+              <PropertyRef Name="Campid" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="CAMPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departmen__INSTI__5165187F">
+          <End Type="TTS_SMSModel.Institution" Role="Institution" Multiplicity="0..1" />
+          <End Type="TTS_SMSModel.Department" Role="Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Institution">
+              <PropertyRef Name="Instid" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="INSTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departmen__INSTI__52593CB8">
+          <End Type="TTS_SMSModel.Institution" Role="Institution" Multiplicity="0..1" />
+          <End Type="TTS_SMSModel.Department" Role="Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Institution">
+              <PropertyRef Name="Instid" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="INSTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Frequency">
+          <Key>
+            <PropertyRef Name="freq_id" />
+          </Key>
+          <Property Name="freq_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Fees_Structure">
+          <Key>
+            <PropertyRef Name="Fee_ID" />
+          </Key>
+          <Property Name="Fee_ID" Type="Int32" Nullable="false" />
+          <Property Name="Instid" Type="Int32" />
+          <Property Name="Campid" Type="Int32" />
+          <Property Name="Classid" Type="Int32" />
+          <Property Name="Head_ID" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Frequency" Type="Int32" />
+          <Property Name="ADDEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ADDEDDATE" Type="DateTime" Precision="3" />
+          <Property Name="UPDATEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UPDATEDATE" Type="DateTime" Precision="3" />
         </EntityType>
         </Schema>
@@ -1538,6 +1787,62 @@ warning 6002: The table/view 'TTS_SMS.dbo.Term_vw' does not have a primary key d
                 <ScalarProperty Name="Campus" ColumnName="Campus" />
                 <ScalarProperty Name="Institute" ColumnName="Institute" />
                 <ScalarProperty Name="Adms_ID" ColumnName="Adms_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Account_Head">
+            <EntityTypeMapping TypeName="TTS_SMSModel.Account_Head">
+              <MappingFragment StoreEntitySet="Account_Head">
+                <ScalarProperty Name="UPDATEDATE" ColumnName="UPDATEDATE" />
+                <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
+                <ScalarProperty Name="ADDEDDATE" ColumnName="ADDEDDATE" />
+                <ScalarProperty Name="ADDEDBY" ColumnName="ADDEDBY" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Campid" ColumnName="Campid" />
+                <ScalarProperty Name="Instid" ColumnName="Instid" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Head_Name" ColumnName="Head_Name" />
+                <ScalarProperty Name="Head_ID" ColumnName="Head_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="TTS_SMSModel.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="UPDATEDATE" ColumnName="UPDATEDATE" />
+                <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
+                <ScalarProperty Name="ADDEDDATE" ColumnName="ADDEDDATE" />
+                <ScalarProperty Name="ADDEDBY" ColumnName="ADDEDBY" />
+                <ScalarProperty Name="DEPTDESCRIPTION" ColumnName="DEPTDESCRIPTION" />
+                <ScalarProperty Name="DEPTNAME" ColumnName="DEPTNAME" />
+                <ScalarProperty Name="CAMPID" ColumnName="CAMPID" />
+                <ScalarProperty Name="INSTID" ColumnName="INSTID" />
+                <ScalarProperty Name="DEPTID" ColumnName="DEPTID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Frequencies">
+            <EntityTypeMapping TypeName="TTS_SMSModel.Frequency">
+              <MappingFragment StoreEntitySet="Frequency">
+                <ScalarProperty Name="Descr" ColumnName="Descr" />
+                <ScalarProperty Name="freq_id" ColumnName="freq_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fees_Structure">
+            <EntityTypeMapping TypeName="TTS_SMSModel.Fees_Structure">
+              <MappingFragment StoreEntitySet="Fees_Structure">
+                <ScalarProperty Name="UPDATEDATE" ColumnName="UPDATEDATE" />
+                <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
+                <ScalarProperty Name="ADDEDDATE" ColumnName="ADDEDDATE" />
+                <ScalarProperty Name="ADDEDBY" ColumnName="ADDEDBY" />
+                <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Head_ID" ColumnName="Head_ID" />
+                <ScalarProperty Name="Classid" ColumnName="Classid" />
+                <ScalarProperty Name="Campid" ColumnName="Campid" />
+                <ScalarProperty Name="Instid" ColumnName="Instid" />
+                <ScalarProperty Name="Fee_ID" ColumnName="Fee_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

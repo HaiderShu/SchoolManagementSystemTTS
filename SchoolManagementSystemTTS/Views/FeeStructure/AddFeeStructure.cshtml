@@ -1,0 +1,148 @@
+﻿@model Fees_Structure
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    TTS_SMSEntities db = new TTS_SMSEntities();
+    ViewBag.Title = "AdmissionForm";
+    ViewBag.Instid = new SelectList(db.Institutions, "Instid", "Instdesc");
+    ViewBag.AccHead = new SelectList(db.Account_Head, "Head_ID", "Head_Name");
+    //ViewBag.AccHead = new SelectList(db.Account_Head, "Head_ID", "Head_Name");
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="card mt-3 mb-3">
+            <div class="card-header">
+                <h3 class="text-center">Create Fee Structure</h3>
+                <hr />
+            </div>
+            <div class="card-body row">
+                <div class="form-group col-md-6 mb-3">
+                    @Html.LabelFor(model => model.Instid, "INSTID", htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-12">
+                        @Html.DropDownListFor(model => model.Instid, (IEnumerable<SelectListItem>)ViewBag.INSTID, "Please Select", new { @class = "form-control", @id = "institute" })
+                            @Html.ValidationMessageFor(model => model.Instid, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    @Html.LabelFor(model => model.Campid, "CAMPID", htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-12">
+                        @Html.DropDownListFor(model => model.Campid, new SelectList(""), "----Select-----", new { @class = "form-control", @id = "campus" })
+                        @Html.ValidationMessageFor(model => model.Campid, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+                <div class="form-group col-md-6 mb-3">
+                    @Html.LabelFor(model => model.Classid, "CLASSID", htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-12">
+                        @Html.DropDownListFor(model => model.Classid, new SelectList(""), new { @class = "form-control", @id = "Class" })
+                        @Html.ValidationMessageFor(model => model.Classid, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    @Html.LabelFor(model => model.Head_ID, "ACCHID", htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-12">
+                        @Html.DropDownListFor(model => model.Instid, (IEnumerable<SelectListItem>)ViewBag.AccHead, "Please Select", new { @class = "form-control", @id = "institute" })
+                        @Html.ValidationMessageFor(model => model.Head_ID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group col-md-6 mb-3"></div>
+
+                <div class="form-group col-md-6 mt-4">
+                    <div class=" col-md-12 d-flex justify-content-end">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "FeestructuresList")
+</div>
+
+
+@*<script>
+    $(document).ready(function () {
+
+
+        $("#institute").change(function () {
+            var InstID = $('#institute').val();
+            debugger;
+            $.ajax({
+                type: 'POST',
+                url: '/DropDowns/GetCampus?id=' + InstID,  // Replace with your actual API endpoint URL
+                contentType: 'application/json',
+                success: function (response) {
+                    debugger;
+                    if (response != "") {
+                        // Handle a successful response from the server
+                        $("#campus").empty();
+                        $("#Class").empty();
+                        $("#campus").append(response);
+                    }
+
+                },
+                error: function (error) {
+                    // Handle errors
+                    console.error(error);
+                }
+            });
+        });
+
+
+
+        $("#campus").change(function () {
+            var campus = $('#campus').val();
+            var InstID = $('#institute').val();
+            debugger;
+            $.ajax({
+                type: 'POST',
+                url: '/DropDowns/GetClasses?campus=' + campus + "&institiute=" + InstID, // Replace with your actual API endpoint URL
+                contentType: 'application/json',
+                success: function (response) {
+                    debugger;
+                    if (response != "") {
+                        // Handle a successful response from the server
+                        $("#Class").empty();
+                        $("#Class").append(response);
+                    }
+
+                },
+                error: function (error) {
+                    // Handle errors
+                    console.error(error);
+                }
+            });
+        });
+
+
+
+
+
+
+
+    });
+</script>
+kjo0l../.*@

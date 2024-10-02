@@ -11,21 +11,18 @@ namespace SchoolManagementSystemTTS.Models
 {
     using System;
     using System.Collections.Generic;
-	using System.ComponentModel.DataAnnotations;
-
-	public partial class Admission_mst
-	{
+    
+    public partial class Admission_mst
+    {
         public int Adms_ID { get; set; }
         public Nullable<int> INSTID { get; set; }
         public Nullable<int> CAMPID { get; set; }
         public string FORM_NO { get; set; }
-
-		public Nullable<System.DateTime> SUBMITTED_DT { get; set; }
+        public Nullable<System.DateTime> SUBMITTED_DT { get; set; }
         public string FIRST_NAME { get; set; }
         public string MIDDLE_NAME { get; set; }
         public string LAST_NAME { get; set; }
-		[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-		public Nullable<System.DateTime> DATE_OF_BIRTH { get; set; }
+        public Nullable<System.DateTime> DATE_OF_BIRTH { get; set; }
         public string RELIGION { get; set; }
         public string DOMICILE { get; set; }
         public string GENDER { get; set; }

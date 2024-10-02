@@ -153,6 +153,7 @@
             <!-- Menu -->
 
             <div class="col-md-3 sidenav">
+
                 @Html.Partial("_Navbar")
             </div>
 
@@ -202,7 +203,7 @@
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="~/assets/img/avatars/1.png"  class="w-px-40 h-auto rounded-circle" />
+                                        <img src="~/assets/img/avatars/1.png" class="w-px-40 h-auto rounded-circle" />
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
@@ -211,7 +212,7 @@
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="~/assets/img/avatars/1.png"  class="w-px-40 h-auto rounded-circle" />
+                                                        <img src="~/assets/img/avatars/1.png" class="w-px-40 h-auto rounded-circle" />
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
@@ -265,6 +266,8 @@
                 <!-- Content wrapper -->
                 <!-- Content -->
                 <div class="container-fluid">
+                    <h4 class="text-success mt-2">@Html.Raw(TempData["success"])</h4>
+                    <h4 class="text-danger mt-3">@Html.Raw(TempData["failed"])</h4>
                     @RenderBody()
                 </div>
 
@@ -311,7 +314,8 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 </html>
-
+@Html.Partial("Ajax")
+ 
 @RenderSection("Scripts", required: false)
 
 <script>

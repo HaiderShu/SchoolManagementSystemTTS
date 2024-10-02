@@ -43,7 +43,7 @@ namespace SchoolManagementSystemTTS.Controllers.Setups
 				}
 				catch (Exception ex)
 				{
-					 
+				
 				}
 				return RedirectToAction("SessionList");
 			}

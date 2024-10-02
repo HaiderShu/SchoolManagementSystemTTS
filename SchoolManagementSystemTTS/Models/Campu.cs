@@ -14,6 +14,13 @@ namespace SchoolManagementSystemTTS.Models
     
     public partial class Campu
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Campu()
+        {
+            this.Departments = new HashSet<Department>();
+            this.Departments1 = new HashSet<Department>();
+        }
+    
         public int Campid { get; set; }
         public Nullable<int> Instid { get; set; }
         public string Campdesc { get; set; }
@@ -26,5 +33,10 @@ namespace SchoolManagementSystemTTS.Models
         public string Updatedby { get; set; }
         public Nullable<System.DateTime> Updatedt { get; set; }
         public string ActvStatus { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Department> Departments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Department> Departments1 { get; set; }
     }
 }

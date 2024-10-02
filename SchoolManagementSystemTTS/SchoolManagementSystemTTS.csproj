@@ -172,6 +172,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdmissionController.cs" />
+    <Compile Include="Controllers\Finance\AccountHeadController.cs" />
+    <Compile Include="Controllers\Finance\FeeStructureController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\Setups\CampusController.cs" />
@@ -188,6 +190,9 @@
       <DependentUpon>SMS_MODEL.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Account_Head.cs">
+      <DependentUpon>SMS_MODEL.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Admission_mst.cs">
       <DependentUpon>SMS_MODEL.tt</DependentUpon>
     </Compile>
@@ -227,7 +232,16 @@
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>SMS_MODEL.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Department.cs">
+      <DependentUpon>SMS_MODEL.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Domicile.cs">
+      <DependentUpon>SMS_MODEL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Fees_Structure.cs">
+      <DependentUpon>SMS_MODEL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Frequency.cs">
       <DependentUpon>SMS_MODEL.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -807,6 +821,11 @@
     <Content Include="Views\Session\EditSession.cshtml" />
     <Content Include="Views\Admission\updateAdmissionForm.cshtml" />
     <Content Include="Views\Admission\AdmissionList.cshtml" />
+    <Content Include="Views\AccountHead\AddAccountHead.cshtml" />
+    <Content Include="Views\AccountHead\AccountHeadlist.cshtml" />
+    <Content Include="Views\Shared\Ajax.cshtml" />
+    <Content Include="Views\AccountHead\EditAccountHead.cshtml" />
+    <Content Include="Views\FeeStructure\AddFeeStructure.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
